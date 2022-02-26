@@ -8,7 +8,7 @@
      let win = new BrowserWindow({
          width:1024,
          height:760,
-         frame: false, //设置为 false 时可以创建一个无边框窗口
+         frame: true, //设置为 false 时可以创建一个无边框窗口
          minHeight: 760,
          minWidth: 1024,
          webPreferences: {
@@ -26,7 +26,7 @@
          win = null;  
      })
      // 开发者工具
-    // win.openDevTools() 
+    win.openDevTools()
      win.on('ready-to-show', function () {
          win.show() // 初始化后再显示
        })

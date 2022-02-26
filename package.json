@@ -1,32 +1,33 @@
 {
-  "name": "project-management-tool",
-  "version": "0.1.0",
-  "description": "project management tool",
-  "main": "index.node",
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
-    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
-    "build-debug": "npm run build --",
-    "build-release": "npm run build -- --release",
-    "install": "npm run build-release",
-    "test": "cargo test",
-    "dev": "electron ./main.js"
+    "dev": "vite",
+    "start": "electron .",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "author": "Andy Xi",
-  "license": "Apache-2.0",
+  "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@fontsource/roboto": "^4.5.3",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.3",
+    "normalize.css": "^8.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
   "devDependencies": {
-    "cargo-cp-artifact": "^0.1",
-    "electron": "^17.1.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/adxc/Proj.MT.git"
-  },
-  "keywords": [
-    "project",
-    "management"
-  ],
-  "bugs": {
-    "url": "https://github.com/adxc/Proj.MT/issues"
-  },
-  "homepage": "https://github.com/adxc/Proj.MT#readme"
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "autoprefixer": "^10.4.2",
+    "electron": "^17.1.0",
+    "postcss": "^8.4.7",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
 }
