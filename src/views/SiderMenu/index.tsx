@@ -9,10 +9,8 @@ import React from 'react';
 
 const SiderMenu = function(){
     return (
-        <div className="basis-52 grow-0 bg-sky-300">
-            <h1 className="text-3xl font-bold underline">
-                Hello world!
-            </h1>
+        <div className="basis-60 h-full bg-purple-800 rounded-2xl">
+
         </div>
     )
 }
