@@ -9,7 +9,7 @@ import React from 'react';
 
 const SiderMenu = function(){
     return (
-        <div className="basis-60 h-full bg-purple-800 rounded-2xl">
+        <div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C]">
 
         </div>
     )
