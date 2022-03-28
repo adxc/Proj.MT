@@ -20,7 +20,7 @@
          show: false // new BrowserWindow创建后先隐藏
      })
      // 加载页面
-     win.loadURL('http://localhost:3000')
+     win.loadURL('http://localhost:3001')
      //关闭页面
      win.on('closed', function(){
          win = null;  
