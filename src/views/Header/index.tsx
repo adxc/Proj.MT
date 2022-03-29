@@ -9,6 +9,7 @@ import React, { FC } from 'react';
 import AppsIcon from '@mui/icons-material/Apps';
 import { HeaderType } from '../../interfaces';
 import classNames from 'classnames';
+import ProjectTabs from "../ProjectTabs";
 
 const Header:FC<HeaderType> = function({isOpen, handleOpen}){
     const isActive = classNames("cursor-pointer","mr-2",{
@@ -20,6 +21,7 @@ const Header:FC<HeaderType> = function({isOpen, handleOpen}){
                <AppsIcon fontSize="large" className={isActive} onClick={handleOpen}/>
                <span className="text-xl font-bold">Proj.</span><span className="text-sm text-slate-400">MT</span>
            </div>
+            <ProjectTabs/>
         </div>
     )
 }
