@@ -3,7 +3,7 @@
     height: 100vh;
     overflow: hidden;
     /*background: linear-gradient(90deg, #4F2872 0%, rgba(97, 47, 114, 0.9) 49.7%, rgba(104, 28, 93, 0.79) 100%);*/
-    background-image: linear-gradient(300deg, #FD6585 10%, #0D25B9 100%);
+    background-image: linear-gradient(320deg, #FD6585 10%, #0D25B9 100%);
 }
 /* 滚动槽 */
 ::-webkit-scrollbar {

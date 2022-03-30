@@ -7,10 +7,10 @@
 */
 import React, {FC, useEffect, useState} from 'react';
 import SiderMenu from '../SiderMenu';
-import {MainType} from "../../interfaces";
+import {IMain} from "../../interfaces";
 import { useSpring, animated } from 'react-spring'
 
-const MainView:FC<MainType> = function({isOpen}){
+const MainView:FC<IMain> = function({isOpen}){
     const [styles,api] = useSpring(() => ({
         from: {
             width: "0px",
