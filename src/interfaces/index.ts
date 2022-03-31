@@ -7,10 +7,15 @@
 *     >  <  | |   | (__  | | | | |  __/ | | | |
 *   /_/\_\ |_|    \___| |_| |_|  \___| |_| |_|
 */
-export interface HeaderType {
+export interface IProjectTabs {
+    projectList: any[];
+    closeProject: () => void;
+}
+export interface IHeader extends IProjectTabs{
     isOpen: boolean;
     handleOpen: () => void;
 }
-export interface MainType {
+export interface IMain {
     isOpen: boolean;
+    openProject: () => void;
 }

@@ -7,11 +7,11 @@
 */
 import React, { FC } from 'react';
 import AppsIcon from '@mui/icons-material/Apps';
-import { HeaderType } from '../../interfaces';
+import {IHeader} from '../../interfaces';
 import classNames from 'classnames';
 import ProjectTabs from "../ProjectTabs";
 
-const Header:FC<HeaderType> = function({isOpen, handleOpen}){
+const Header:FC<IHeader> = function({isOpen, handleOpen, projectList, closeProject}){
     const isActive = classNames("cursor-pointer","mr-2",{
         "text-orange-500":isOpen
     })
