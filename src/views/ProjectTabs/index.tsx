@@ -5,7 +5,7 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React, {useLayoutEffect, FC, useEffect, useState, useMemo} from 'react';
+import React, {useLayoutEffect, FC, MouseEvent, useState, useMemo} from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,7 +13,7 @@ import {IProjectTabs} from "../../interfaces";
 import classNames from 'classnames';
 
 const TAB_WIDTH = 144;
-const ProjectTabs: FC<IProjectTabs> = function({projectList=[],closeProject}){
+const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{a:1},{a:1}],closeProject}){
     const myRef = React.createRef<HTMLDivElement>();
     const [showScroll, setShowScroll] = useState<boolean>(false);
     const [selectProject, setSelectProject] = useState<any>('');
@@ -30,9 +30,9 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[],closeProject}){
             'border-t-4': true,
         })
         return (
-            <div className={styles} onClick={() => handleSelectProject}>
+            <div className={styles} onClick={() => handleSelectProject()}>
                 <span className="inline-block truncate max-w-[98px]">1222222222222223232</span>
-                <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer"/>
+                <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer" onClick={(e) => handleCloseProject(e)}/>
             </div>
         )
     }),[projectList,selectProject])
@@ -52,7 +52,12 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[],closeProject}){
     }
     // 选择项目
     function handleSelectProject(){
-
+        console.log(1)
+    }
+    // 关闭项目
+    function handleCloseProject(e: MouseEvent){
+        e.stopPropagation();
+        console.log(2)
     }
     return (
         <div className="flex w-full h-full">
@@ -63,18 +68,7 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[],closeProject}){
                 </div>
             }
             <div className="flex h-full overflow-x-auto scroll-smooth w-11/12" ref={myRef}>
-                <div className="relative shrink-0 basis-36 h-full bg-[#6D417D]/80 mr-2 flex justify-center cursor-pointer items-center  border-rose-600">
-                    <span className="inline-block truncate max-w-[98px]">1222222222222223232</span>
-                    <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer"/>
-                </div>
-                <div className="relative shrink-0 basis-36 h-full bg-[#6D417D]/80 cursor-pointer mr-2 flex justify-center items-center border-t-4 border-rose-600">
-                    <span className="inline-block truncate max-w-[98px]">1</span>
-                    <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer"/>
-                </div>
-                <div className="relative shrink-0 basis-36 h-full bg-[#6D417D]/80 mr-2 flex justify-center items-center border-t-4 border-rose-600">
-                    <span className="inline-block truncate max-w-[98px]">1</span>
-                    <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer"/>
-                </div>
+                { projectTabs }
             </div>
             {
                 showScroll &&

@@ -26,7 +26,7 @@ const MainView:FC<IMain> = function({isOpen}){
     },[isOpen])
     return (
         <div className="flex h-[calc(100vh-3rem)] relative">
-            <div className="h-full absolute">
+            <div className="h-full absolute overflow-hidden">
                 <animated.div style={styles}><SiderMenu/></animated.div>
             </div>
             dada
