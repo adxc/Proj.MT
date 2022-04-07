@@ -11,6 +11,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
 import {IProjectTabs} from "../../interfaces";
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 const TAB_WIDTH = 144;
 const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{a:1},{a:1}],closeProject}){
@@ -18,8 +19,12 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
     const [showScroll, setShowScroll] = useState<boolean>(false);
     const [selectProject, setSelectProject] = useState<any>('');
     useLayoutEffect(() =>{
+        shouldShowScroll()
         window.addEventListener('resize',shouldShowScroll)
-    },[])
+    },[shouldShowScroll])
+    const scrollStyle = useMemo(() => classNames('bg-[#FF7179]/80 flex justify-center items-center cursor-pointer opacity-0',{
+        'opacity-100': showScroll
+    }),[showScroll])
     // 项目tabs
     const projectTabs = useMemo(() => projectList.map(item => {
         const styles = classNames('relative ' +
@@ -29,8 +34,9 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
             'items-center border-rose-600',{
             'border-t-4': true,
         })
+        const uuid = uuidv4()
         return (
-            <div className={styles} onClick={() => handleSelectProject()}>
+            <div className={styles} onClick={() => handleSelectProject()} key={uuid}>
                 <span className="inline-block truncate max-w-[98px]">1222222222222223232</span>
                 <CloseIcon fontSize="small" className="absolute right-2 cursor-pointer" onClick={(e) => handleCloseProject(e)}/>
             </div>
@@ -61,22 +67,16 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
     }
     return (
         <div className="flex w-full h-full">
-            {
-                showScroll &&
-                <div className="bg-[#FF7179]/80 flex justify-center items-center cursor-pointer mr-2 " onClick={() => handleScroll(false)}>
-                    <ArrowBackIosNewIcon/>
-                </div>
-            }
-            <div className="flex h-full overflow-x-auto scroll-smooth w-11/12" ref={myRef}>
+            <div className={scrollStyle} onClick={() => handleScroll(false)}>
+                <ArrowBackIosNewIcon/>
+            </div>
+            <div className="flex h-full overflow-x-auto scroll-smooth w-11/12  ml-2" ref={myRef}>
                 { projectTabs }
             </div>
-            {
-                showScroll &&
-                <div className="bg-[#FF7179]/80 flex justify-center items-center cursor-pointer"
-                  onClick={() => handleScroll(true)}>
-                    <ArrowForwardIosIcon/>
-                </div>
-            }
+            <div className={scrollStyle}
+                 onClick={() => handleScroll(true)}>
+                <ArrowForwardIosIcon/>
+            </div>
         </div>
 
     )

@@ -11,14 +11,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolderPlus,faFileImport} from '@fortawesome/free-solid-svg-icons';
 
 const actions = [
-    { icon: <FileCopyIcon />, name: 'Copy' },
-    { icon: <SaveIcon />, name: 'Save' },
+    { icon: <FontAwesomeIcon icon={faFileImport} fontSize={16}/>, name: '导入' },
+    { icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16}/>, name: '新建' },
 ];
 const SiderMenu = function(){
     return (
