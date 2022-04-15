@@ -13,7 +13,7 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolderPlus,faFileUpload, faFolderOpen, faFolder} from '@fortawesome/free-solid-svg-icons';
-import ProjectItem from "../../components/ProjectItem";
+import ProjectItem from '@components/ProjectItem';
 
 const actions = [
     { icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16}/>, name: '导入' },
