@@ -5,22 +5,27 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { TextField,InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFolderPlus,faFileImport} from '@fortawesome/free-solid-svg-icons';
+import { faFolderPlus,faFileUpload, faFolderOpen, faFolder} from '@fortawesome/free-solid-svg-icons';
+import ProjectItem from "../../components/ProjectItem";
 
 const actions = [
-    { icon: <FontAwesomeIcon icon={faFileImport} fontSize={16}/>, name: '导入' },
+    { icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16}/>, name: '导入' },
     { icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16}/>, name: '新建' },
 ];
 const SiderMenu = function(){
+    const [open, setOpen] = useState(false);
+    function handleOpen(){
+        setOpen((c:boolean) => !c)
+    }
     return (
-        <div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C] p-6 flex flex-col">
+        <div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C] p-4 flex flex-col">
             <TextField label="Search"
                        variant="outlined"
                        size="small"
@@ -31,6 +36,7 @@ const SiderMenu = function(){
 
             />
             <div className="my-5 h-4/5">
+                <ProjectItem isOpen={open} openProject={handleOpen}/>
                 <div>123</div>
                 <div>123</div>
                 <div>123</div>

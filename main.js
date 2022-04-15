@@ -13,7 +13,6 @@
          minWidth: 1024,
          webPreferences: {
              nodeIntegration: true,
-             enableRemoteModule: true,
              contextIsolation: false,
              webSecurity: false //解决跨域
          },

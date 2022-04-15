@@ -19,3 +19,7 @@ export interface IMain {
     isOpen: boolean;
     openProject: () => void;
 }
+export interface IProject {
+    isOpen: boolean;
+    openProject: () => void;
+}
