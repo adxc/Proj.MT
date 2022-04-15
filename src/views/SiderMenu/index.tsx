@@ -23,6 +23,7 @@ const SiderMenu = function(){
     const [open, setOpen] = useState(false);
     function handleOpen(){
         setOpen((c:boolean) => !c)
+        window.electronAPI.openFolder();
     }
     return (
         <div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C] p-4 flex flex-col">

@@ -2,9 +2,12 @@
  * app 模块，它控制应用程序的事件生命周期
  * BrowserWindow 模块，它创建和管理应用程序 窗口。
  */
- const { app, BrowserWindow } = require('electron');
 
- function createWindow(){
+const { app, BrowserWindow } = require('electron');
+const path = require('path');
+const initialiseEventListeners = require("./server/event");
+
+function createWindow(){
      let win = new BrowserWindow({
          width:1024,
          height:760,
@@ -13,7 +16,8 @@
          minWidth: 1024,
          webPreferences: {
              nodeIntegration: true,
-             contextIsolation: false,
+             contextIsolation: true,
+             preload:path.resolve(__dirname,'server/preload.js'),
              webSecurity: false //解决跨域
          },
          show: false // new BrowserWindow创建后先隐藏
@@ -30,5 +34,9 @@
          win.show() // 初始化后再显示
        })
  }
- 
- app.whenReady().then(() => createWindow());
+
+ app.whenReady()
+     .then(() =>{
+         createWindow();
+         initialiseEventListeners()
+     });
