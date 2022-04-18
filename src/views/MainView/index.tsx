@@ -7,6 +7,7 @@
 */
 import React, {FC, useEffect, useState} from 'react';
 import SiderMenu from '../SiderMenu';
+import TerminalView from "../TerminalView";
 import {IMain} from "../../interfaces";
 import { useSpring, animated } from 'react-spring'
 
@@ -29,7 +30,7 @@ const MainView:FC<IMain> = function({isOpen}){
             <div className="h-full absolute overflow-hidden">
                 <animated.div style={styles}><SiderMenu/></animated.div>
             </div>
-            dada
+            <TerminalView/>
         </div>
     )
 }
