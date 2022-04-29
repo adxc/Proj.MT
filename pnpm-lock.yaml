@@ -15,6 +15,7 @@ specifiers:
   '@types/uuid': ^8.3.4
   '@vitejs/plugin-react': ^1.0.7
   autoprefixer: ^10.4.2
+  chalk: ^5.0.1
   classnames: ^2.3.1
   electron: ^17.3.1
   normalize.css: ^8.0.1
@@ -40,6 +41,7 @@ dependencies:
   '@fortawesome/react-fontawesome': 0.1.18_6909f5698ccb6b468185370814560628
   '@mui/icons-material': 5.5.1_af6b22bd81129713324316aecd007818
   '@mui/material': 5.5.2_9595c0fe4bca5fc99bf42a66077e39bf
+  chalk: 5.0.1
   classnames: 2.3.1
   normalize.css: 8.0.1
   react: 17.0.2
@@ -1076,6 +1078,11 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
 
   /chokidar/3.5.3:
     resolution: {integrity: sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==}
