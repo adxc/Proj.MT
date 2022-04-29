@@ -33,7 +33,7 @@ const TerminalView = function (){
           } else {
               term.write(char);
           }
-          console.log(term._core.buffer.x )
+          console.log((term as any)._core.buffer.x )
           console.log(e)
       });
   },[])
