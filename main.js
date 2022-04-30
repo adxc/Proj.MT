@@ -6,6 +6,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const initialiseEventListeners = require("./server/event");
+const initialiseTerminalListeners = require("./server/terminalEvent");
 
 function createWindow(){
      let win = new BrowserWindow({
@@ -38,5 +39,6 @@ function createWindow(){
  app.whenReady()
      .then(() =>{
          createWindow();
-         initialiseEventListeners()
+         initialiseEventListeners();
+         initialiseTerminalListeners();
      });

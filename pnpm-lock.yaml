@@ -18,6 +18,7 @@ specifiers:
   chalk: ^5.0.1
   classnames: ^2.3.1
   electron: ^18.0.4
+  node-pty: ^0.10.1
   normalize.css: ^8.0.1
   postcss: ^8.4.7
   react: ^18.0.0
@@ -43,6 +44,7 @@ dependencies:
   '@mui/material': 5.6.2_a0317eed51172d8b4fa757831d46bbfe
   chalk: 5.0.1
   classnames: 2.3.1
+  node-pty: 0.10.1
   normalize.css: 8.0.1
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
@@ -1952,11 +1954,22 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
+  /nan/2.15.0:
+    resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    dev: false
+
   /nanoid/3.3.2:
     resolution: {integrity: sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /node-pty/0.10.1:
+    resolution: {integrity: sha512-JTdtUS0Im/yRsWJSx7yiW9rtpfmxqxolrtnyKwPLI+6XqTAPW/O2MjS8FYL4I5TsMbH2lVgDb2VMjp+9LoQGNg==}
+    requiresBuild: true
+    dependencies:
+      nan: 2.15.0
+    dev: false
 
   /node-releases/2.0.2:
     resolution: {integrity: sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==}
