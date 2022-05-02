@@ -5,6 +5,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return ipcRenderer.invoke('dialog:openFolder');
   },
   sendTerminalData:(command) => {
-    return ipcRenderer.invoke('terminal:sendData', command);
+    ipcRenderer.invoke('terminal:sendData', command);
+  },
+  receiveTerminalData: (callback) => {
+    ipcRenderer.on('terminal:receiveData', (event, data) => {
+      callback(data);
+    });
   },
 });

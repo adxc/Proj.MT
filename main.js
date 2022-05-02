@@ -31,14 +31,14 @@ function createWindow(){
      })
      // 开发者工具
     win.openDevTools()
-     win.on('ready-to-show', function () {
+    win.on('ready-to-show', function () {
          win.show() // 初始化后再显示
        })
+    initialiseEventListeners();
+    initialiseTerminalListeners(win);
  }
 
  app.whenReady()
      .then(() =>{
          createWindow();
-         initialiseEventListeners();
-         initialiseTerminalListeners();
      });
