@@ -10,11 +10,11 @@
 const { ipcMain } = require('electron');
 const os = require('os');
 const pty = require('node-pty');
-const shell = os.platform() === 'win32' ? 'powershell.exe' : 'zsh';
+const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 const ptyProcess = pty.spawn(shell, [], {
     name: 'xterm-color',
-    cols: 160,
-    rows: 40,
+    cols: 120,
+    rows: 18,
     cwd: process.env.HOME,
     env: process.env
 });

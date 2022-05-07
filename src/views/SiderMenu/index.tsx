@@ -12,7 +12,7 @@ import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFolderPlus,faFileUpload, faFolderOpen, faFolder} from '@fortawesome/free-solid-svg-icons';
+import { faFolderPlus,faFileUpload} from '@fortawesome/free-solid-svg-icons';
 import ProjectItem from '@components/ProjectItem';
 
 const actions = [
@@ -23,7 +23,9 @@ const SiderMenu = function(){
     const [open, setOpen] = useState(false);
     function handleOpen(){
         setOpen((c:boolean) => !c)
-        window.electronAPI.openFolder();
+        window.electronAPI.openFolder().then((res: any) => {
+            console.log(res)
+        })
     }
     return (
         <div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C] p-4 flex flex-col">

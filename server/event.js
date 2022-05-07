@@ -1,13 +1,14 @@
 const {dialog, ipcMain} = require('electron');
 
 function handleFolderOpen(){
-    dialog.showOpenDialog({
+   dialog.showOpenDialog({
         properties: ['openDirectory']
     }).then(result => {
         if(result.canceled){
             return;
         }
         console.log(result.filePaths)
+        return result
     });
 }
 
