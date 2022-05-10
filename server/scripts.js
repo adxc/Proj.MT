@@ -1,8 +1,9 @@
 const fs = require('fs')
 
-async function scripts(path) {
+async function getScript(path) {
 	return new Promise((r, j) => {
 		fs.readFile(path + '/package.json', function (err, data) {
+			console.log(4444, data, path)
 			const scripts = JSON.parse(data).scripts
 			const scriptsArr = Object.keys(scripts).map((i) => ({
 				name: i,
@@ -12,5 +13,5 @@ async function scripts(path) {
 		})
 	})
 }
-// scripts('/Users/wangjianhua/code/project/Proj.MT').then(res=>console.log(res))
-module.exports = scripts
+getScript('/Users/wangjianhua/code/qmai/bi-vue').then((res) => console.log(res))
+module.exports = getScript

@@ -6,7 +6,7 @@ var fs = require('fs')
  *
  */
 
-function geFileList(path) {
+function geFileListSize(path) {
 	const filesList = []
 	readFile(path, filesList)
 	let size = filesList.reduce((a, b) => {
@@ -43,5 +43,6 @@ function readFile(path, filesList) {
 	}
 }
 
-const size = geFileList('/Users/wangjianhua/code/project/Proj.MT')
-console.log(size)
+// const size = geFileListSize('/Users/wangjianhua/code/qmai/bi-vue')
+// console.log(size)
+module.exports = geFileListSize
