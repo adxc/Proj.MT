@@ -5,7 +5,7 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React, {useLayoutEffect, FC, MouseEvent, useState, useMemo} from 'react';
+import React, {useLayoutEffect, FC, MouseEvent, useState, useMemo, SyntheticEvent} from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CloseIcon from '@mui/icons-material/Close';
@@ -17,9 +17,11 @@ import Tabs from "@mui/material/Tabs";
 
 
 const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{a:1},{a:1}],closeProject}){
+    const [value, setValue] = useState(0);
     // 选择项目
-    function handleSelectProject(){
+    function handleSelectProject(e: SyntheticEvent,value: number) {
         console.log(1)
+        setValue(value);
     }
     // 关闭项目
     function handleCloseProject(e: MouseEvent){
@@ -29,11 +31,12 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
     return (
         <div className="flex w-full h-full">
             <Tabs
-                value={0}
+                value={value}
                 variant="scrollable"
                 scrollButtons="auto"
                 textColor="inherit"
                 aria-label="projects tabs"
+                onChange={handleSelectProject}
             >
                 <Tab label="Item One"
                 />

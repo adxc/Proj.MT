@@ -10,7 +10,7 @@ import { useSpring, animated } from 'react-spring'
 import classNames from "classnames";
 
 const TerminalView = function (){
-    const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
+    const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const terminalRef = useRef<HTMLDivElement>(null);
     const styles = useSpring({transition: 'height .5s',})
     const term = useMemo(() => new Terminal({

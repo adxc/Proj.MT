@@ -5,7 +5,7 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import SiderMenu from '../SiderMenu';
 import TerminalView from "../TerminalView";
 import {IMain} from "../../interfaces";
