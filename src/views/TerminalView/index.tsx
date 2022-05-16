@@ -51,7 +51,7 @@ const TerminalView = function (){
                     <span className="cursor-pointer mr-1" onClick={handleCollapse}>
                         {!isCollapsed ? <ArrowCircleDownSharpIcon/> : <ArrowCircleUpSharpIcon/>}
                     </span>
-                    <span><HighlightOffSharpIcon className="text-red-700 cursor-pointer"/></span>
+                    {/*<span><HighlightOffSharpIcon className="text-red-700 cursor-pointer"/></span>*/}
                 </div>
             </div>
             <div ref={terminalRef}/>

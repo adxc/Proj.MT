@@ -15,13 +15,14 @@ code {
     monospace;
 }
 .MuiTextField-root > .MuiInputLabel-root{
-  color: white;
+  color: rgb(255 255 255);
 }
 .MuiInputBase-root > .MuiInputBase-input{
-  color: white;
+  color: rgb(255 255 255);
 }
+
 .MuiTextField-root > .MuiInputLabel-root.Mui-focused{
-  color: white;
+  color: rgb(255 255 255);
 }
 .MuiTextField-root > .MuiOutlinedInput-root:hover > .MuiOutlinedInput-notchedOutline{
   border-color: #FE7179;
@@ -32,4 +33,10 @@ code {
 #addnewproject-actions{
   flex-direction: row;
 }
-
+.MuiButtonBase-root.MuiTab-root.Mui-selected{
+  background: rgb(142 98 158 / 0.8);
+  color: #FE7179;
+}
+.MuiTabs-scroller >.MuiTabs-indicator{
+  background: #FE7179;
+}

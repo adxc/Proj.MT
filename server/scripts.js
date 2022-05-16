@@ -13,5 +13,4 @@ async function getScript(path) {
 		})
 	})
 }
-getScript('/Users/wangjianhua/code/qmai/bi-vue').then((res) => console.log(res))
 module.exports = getScript
