@@ -11,6 +11,7 @@ import TerminalView from "../TerminalView";
 import {IMain} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
 import TabPanel from '@components/TabPanel';
+import ProjectMainView from "../ProjectMainView";
 
 const MainView:FC<IMain> = function({isOpen, openProject}){
     const [styles,api] = useSpring(() => ({
@@ -31,10 +32,7 @@ const MainView:FC<IMain> = function({isOpen, openProject}){
             <animated.div style={styles} className="overflow-hidden"><SiderMenu openProject={openProject}/></animated.div>
             <div className="h-full relative w-full">
                 <TabPanel value={0} index={0}>
-                    <>
-                        dsfsdf
-                        <TerminalView/>
-                    </>
+                    <ProjectMainView/>
                 </TabPanel>
             </div>
         </div>
