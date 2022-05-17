@@ -11,7 +11,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
 
-const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{a:1},{a:1}]}){
+const ProjectTabs: FC<IProjectTabs> = function({projectList=[]}){
     const [value, setValue] = useState(0);
     // 选择项目
     function handleSelectProject(e: SyntheticEvent,value: number) {
@@ -19,7 +19,7 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
         setValue(value);
     }
     return (
-        <div className="flex w-full h-full">
+        <div className="flex w-[calc(100vw-220px)] h-full">
             <Tabs
                 value={value}
                 variant="scrollable"
@@ -28,13 +28,10 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[{a:1},{a:1},{a:1},{
                 aria-label="projects tabs"
                 onChange={handleSelectProject}
             >
-                <Tab label="Item One"/>
-                <Tab label="Item Two"/>
-                <Tab label="Item Three" />
-                <Tab label="Item Four" />
-                <Tab label="Item Five" />
-                <Tab label="Item Six" />
-                <Tab label="Item Seven" />
+                {
+                    projectList.map((item, index) => <Tab key={index} label={item.name}/>)
+                }
+
             </Tabs>
         </div>
 

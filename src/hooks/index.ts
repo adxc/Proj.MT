@@ -24,8 +24,8 @@ export function useProject() {
         dispatch({type:'open',payload:[project]})
     }
     // 关闭项目
-    function closeProject(id:any){
-        dispatch({type:'open',payload:id})
+    function closeProject(pid:any){
+        dispatch({type:'open',payload:pid})
     }
     return {
         projectList: state?.projectList,

@@ -15,13 +15,14 @@ const Header:FC<IHeader> = function({isOpen, handleOpen, projectList}){
     const isActive = classNames("cursor-pointer","mr-2",{
         "text-orange-500":isOpen
     })
+    console.log(projectList)
     return (
         <div className="h-12  bg-gradient-to-r from-violet-900 to-fuchsia-500  flex items-center text-white">
-           <div className="flex items-center basis-1/3">
+           <div className="flex items-center flex-[0_0_220px]">
                <AppsIcon fontSize="large" className={isActive} onClick={handleOpen}/>
                <span className="text-xl font-bold">Proj.</span><span className="text-sm text-slate-400">MT</span>
            </div>
-            <ProjectTabs projectList={[]}/>
+            <ProjectTabs projectList={projectList}/>
         </div>
     )
 }

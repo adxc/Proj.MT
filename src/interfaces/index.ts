@@ -26,7 +26,7 @@ export interface IProject {
     isOpen: boolean;
     name: string;
     pid: any;
-    openProject: (project:any) => void;
+    openProject: (pid:any, name:string) => void;
 }
 export interface ITabPanelProps{
     index: number;

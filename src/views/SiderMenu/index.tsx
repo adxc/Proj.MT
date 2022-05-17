@@ -20,10 +20,10 @@ const actions = [
 	{ icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16} />, name: '导入' },
 	{ icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16} />, name: '新建' },
 ]
-const SiderMenu: FC<ISiderMenuProps> = function () {
+const SiderMenu: FC<ISiderMenuProps> = function ({openProject}) {
 	const [openIndex, setOpenIndex] = useState<any>(1)
-	function handleOpen(pid: any) {
-		console.log(pid)
+	function handleOpen(pid: any, name: string) {
+		openProject({ pid, name })
 		setOpenIndex(pid)
 		// window.electronAPI.openFolder().then((res: any) => {
 		// 	console.log(res)
