@@ -8,10 +8,11 @@
 import React, {FC, useEffect} from 'react';
 import SiderMenu from '../SiderMenu';
 import TerminalView from "../TerminalView";
-import {IMain} from "../../interfaces";
+import {IMain} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
+import TabPanel from '@components/TabPanel';
 
-const MainView:FC<IMain> = function({isOpen}){
+const MainView:FC<IMain> = function({isOpen, openProject}){
     const [styles,api] = useSpring(() => ({
         from: {
             width: "0px",
@@ -26,13 +27,15 @@ const MainView:FC<IMain> = function({isOpen}){
         })
     },[isOpen])
     return (
-        <div className="flex h-[calc(100vh-3rem)] relative">
-            <div className="h-full absolute overflow-hidden z-10">
-                <animated.div style={styles}><SiderMenu/></animated.div>
-            </div>
+        <div className="flex h-[calc(100vh-3rem)]">
+            <animated.div style={styles} className="overflow-hidden"><SiderMenu openProject={openProject}/></animated.div>
             <div className="h-full relative w-full">
-                dsfsdf
-                <TerminalView/>
+                <TabPanel value={0} index={0}>
+                    <>
+                        dsfsdf
+                        <TerminalView/>
+                    </>
+                </TabPanel>
             </div>
         </div>
     )

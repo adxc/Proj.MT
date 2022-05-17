@@ -7,11 +7,11 @@
 */
 import React, { FC } from 'react';
 import AppsIcon from '@mui/icons-material/Apps';
-import {IHeader} from '../../interfaces';
+import {IHeader} from '@interfaces';
 import classNames from 'classnames';
 import ProjectTabs from "../ProjectTabs";
 
-const Header:FC<IHeader> = function({isOpen, handleOpen, projectList, closeProject}){
+const Header:FC<IHeader> = function({isOpen, handleOpen, projectList}){
     const isActive = classNames("cursor-pointer","mr-2",{
         "text-orange-500":isOpen
     })
@@ -21,7 +21,7 @@ const Header:FC<IHeader> = function({isOpen, handleOpen, projectList, closeProje
                <AppsIcon fontSize="large" className={isActive} onClick={handleOpen}/>
                <span className="text-xl font-bold">Proj.</span><span className="text-sm text-slate-400">MT</span>
            </div>
-            <ProjectTabs closeProject={() => {}} projectList={[]}/>
+            <ProjectTabs projectList={[]}/>
         </div>
     )
 }

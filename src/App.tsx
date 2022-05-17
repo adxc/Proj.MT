@@ -9,7 +9,7 @@ function App() {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     return (
         <div className="App">
-            <Header isOpen={isOpen} closeProject={closeProject} handleOpen={() => setIsOpen(c => !c)} projectList={projectList}/>
+            <Header isOpen={isOpen} handleOpen={() => setIsOpen(c => !c)} projectList={projectList}/>
             <MainView isOpen={isOpen} openProject={openProject}/>
         </div>
     )

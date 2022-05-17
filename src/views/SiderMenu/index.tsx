@@ -5,7 +5,7 @@
  *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)
  *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
  */
-import React, { useEffect, useState } from 'react'
+import React, {FC, useState} from 'react'
 import { TextField, InputAdornment } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import SpeedDial from '@mui/material/SpeedDial'
@@ -14,21 +14,23 @@ import SpeedDialAction from '@mui/material/SpeedDialAction'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import ProjectItem from '@components/ProjectItem'
+import {ISiderMenuProps} from "@interfaces";
 
 const actions = [
 	{ icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16} />, name: '导入' },
 	{ icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16} />, name: '新建' },
 ]
-const SiderMenu = function () {
-	const [open, setOpen] = useState(false)
-	function handleOpen() {
-		setOpen((c: boolean) => !c)
-		window.electronAPI.openFolder().then((res: any) => {
-			console.log(res)
-		})
+const SiderMenu: FC<ISiderMenuProps> = function () {
+	const [openIndex, setOpenIndex] = useState<any>(1)
+	function handleOpen(pid: any) {
+		console.log(pid)
+		setOpenIndex(pid)
+		// window.electronAPI.openFolder().then((res: any) => {
+		// 	console.log(res)
+		// })
 	}
 	return (
-		<div className="basis-60 h-full bg-[#41106C] rounded-2xl shadow-md shadow-[#41106C] p-4 flex flex-col">
+		<div className="basis-60 h-full bg-[#41106C] shadow-md shadow-[#41106C] p-4 flex flex-col">
 			<TextField
 				label="Search"
 				variant="outlined"
@@ -43,11 +45,11 @@ const SiderMenu = function () {
 				}}
 			/>
 			<div className="my-5 h-4/5">
-				<ProjectItem isOpen={open} openProject={handleOpen} />
-				<div>123</div>
-				<div>123</div>
-				<div>123</div>
-				<div>123</div>
+				{
+					Array.from({length:10}, (_,i) => i + 1).map((item: any) => {
+						return <ProjectItem key={item} name={`demo${item}`} pid={item} openProject={handleOpen} isOpen={openIndex === item}/>
+					})
+				}
 			</div>
 			<SpeedDial ariaLabel="add new project" icon={<SpeedDialIcon />}>
 				{actions.map((action) => (

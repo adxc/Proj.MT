@@ -7,19 +7,30 @@
 *     >  <  | |   | (__  | | | | |  __/ | | | |
 *   /_/\_\ |_|    \___| |_| |_|  \___| |_| |_|
 */
+import { ReactNode } from 'react';
 export interface IProjectTabs {
     projectList: any[];
-    closeProject: () => void;
 }
 export interface IHeader extends IProjectTabs{
     isOpen: boolean;
     handleOpen: () => void;
 }
+export interface ISiderMenuProps{
+    openProject: (project:any) => void;
+}
 export interface IMain {
     isOpen: boolean;
-    openProject: () => void;
+    openProject: (project:any) => void;
 }
 export interface IProject {
     isOpen: boolean;
-    openProject: () => void;
+    name: string;
+    pid: any;
+    openProject: (project:any) => void;
+}
+export interface ITabPanelProps{
+    index: number;
+    value: number;
+    classes?: string | string[];
+    children?: ReactNode;
 }
