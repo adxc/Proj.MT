@@ -15,7 +15,6 @@ const Header:FC<IHeader> = function({isOpen, handleOpen, projectList}){
     const isActive = classNames("cursor-pointer","mr-2",{
         "text-orange-500":isOpen
     })
-    console.log(projectList)
     return (
         <div className="h-12  bg-gradient-to-r from-violet-900 to-fuchsia-500  flex items-center text-white">
            <div className="flex items-center flex-[0_0_220px]">

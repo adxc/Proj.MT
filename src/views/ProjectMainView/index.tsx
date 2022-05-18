@@ -11,7 +11,10 @@ import TerminalView from "../TerminalView";
 const ProjectMainView = function () {
     return (
         <div>
-            dsfsdf222
+            <div className="px-10">
+                <div className="font-[butter-sans]  text-[36px] mt-10 text-white">Demo</div>
+                <div className="mt-4 bg-indigo-500/40 h-[calc(100vh-200px)] rounded-xl">123123</div>
+            </div>
             <TerminalView/>
         </div>
     );
