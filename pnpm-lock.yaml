@@ -12,6 +12,8 @@ specifiers:
   '@mui/material': ^5.7.0
   '@types/react': ^18.0.9
   '@types/react-dom': ^18.0.4
+  '@types/react-virtualized-auto-sizer': ^1.0.1
+  '@types/react-window': ^1.8.5
   '@types/uuid': ^8.3.4
   '@vitejs/plugin-react': ^1.3.2
   autoprefixer: ^10.4.7
@@ -25,6 +27,8 @@ specifiers:
   react: ^18.1.0
   react-dom: ^18.1.0
   react-spring: ^9.4.5
+  react-virtualized-auto-sizer: ^1.0.6
+  react-window: ^1.8.7
   shelljs: ^0.8.5
   tailwindcss: ^3.0.24
   typescript: ^4.6.4
@@ -51,6 +55,8 @@ dependencies:
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-spring: 9.4.5_ef5jwxihqo6n7gxfmzogljlgcm
+  react-virtualized-auto-sizer: 1.0.6_ef5jwxihqo6n7gxfmzogljlgcm
+  react-window: 1.8.7_ef5jwxihqo6n7gxfmzogljlgcm
   shelljs: 0.8.5
   uuid: 8.3.2
   xterm: 4.18.0
@@ -59,6 +65,8 @@ dependencies:
 devDependencies:
   '@types/react': 18.0.9
   '@types/react-dom': 18.0.4
+  '@types/react-virtualized-auto-sizer': 1.0.1
+  '@types/react-window': 1.8.5
   '@types/uuid': 8.3.4
   '@vitejs/plugin-react': 1.3.2
   autoprefixer: 10.4.7_postcss@8.4.13
@@ -1019,6 +1027,18 @@ packages:
       '@types/react': 18.0.9
     dev: false
 
+  /@types/react-virtualized-auto-sizer/1.0.1:
+    resolution: {integrity: sha512-GH8sAnBEM5GV9LTeiz56r4ZhMOUSrP43tAQNSRVxNexDjcNKLCEtnxusAItg1owFUFE6k0NslV26gqVClVvong==}
+    dependencies:
+      '@types/react': 18.0.9
+    dev: true
+
+  /@types/react-window/1.8.5:
+    resolution: {integrity: sha512-V9q3CvhC9Jk9bWBOysPGaWy/Z0lxYcTXLtLipkt2cnRj1JOSFNF7wqGpkScSXMgBwC+fnVRg/7shwgddBG5ICw==}
+    dependencies:
+      '@types/react': 18.0.9
+    dev: true
+
   /@types/react/18.0.9:
     resolution: {integrity: sha512-9bjbg1hJHUm4De19L1cHiW0Jvx3geel6Qczhjd0qY5VKVE2X5+x77YxAepuCwVh4vrgZJdgEJw48zrhRIeF4Nw==}
     dependencies:
@@ -1167,7 +1187,7 @@ packages:
   /babel-plugin-macros/2.8.0:
     resolution: {integrity: sha512-SEP5kJpfGYqYKpBrj5XU3ahw5p5GOHJ0U5ssOSQ/WBVdwkD2Dzlce95exQTs3jOVWPPKLBN2rlEWkCK7dSmLvg==}
     dependencies:
-      '@babel/runtime': 7.17.8
+      '@babel/runtime': 7.17.9
       cosmiconfig: 6.0.0
       resolve: 1.22.0
     dev: false
@@ -2477,6 +2497,10 @@ packages:
     dev: true
     optional: true
 
+  /memoize-one/5.2.1:
+    resolution: {integrity: sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==}
+    dev: false
+
   /merge2/1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
@@ -2985,6 +3009,30 @@ packages:
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: false
+
+  /react-virtualized-auto-sizer/1.0.6_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-7tQ0BmZqfVF6YYEWcIGuoR3OdYe8I/ZFbNclFlGOC3pMqunkYF/oL30NCjSGl9sMEb17AnzixDz98Kqc3N76HQ==}
+    engines: {node: '>8.0.0'}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0
+      react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0
+    dependencies:
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: false
+
+  /react-window/1.8.7_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-JHEZbPXBpKMmoNO1bNhoXOOLg/ujhL/BU4IqVU9r8eQPcy5KQnGHIHDRkJ0ns9IM5+Aq5LNwt3j8t3tIrePQzA==}
+    engines: {node: '>8.0.0'}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.17.9
+      memoize-one: 5.2.1
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: false

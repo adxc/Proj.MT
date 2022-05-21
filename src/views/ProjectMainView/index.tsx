@@ -9,6 +9,8 @@ import React from 'react';
 import TerminalView from "../TerminalView";
 import ReactLogo from '../../assets/images/react.svg';
 import Vite from '../../favicon.svg'
+import CommandListView from "../CommandListView";
+import PackageListView from "../PackageListView";
 
 const ProjectMainView = function () {
     return (
@@ -26,7 +28,14 @@ const ProjectMainView = function () {
                         <div className="w-full bg-sky-700 flex justify-center items-center">213123</div>
                         <div className="w-full bg-blue-300 flex justify-center items-center">123123</div>
                     </div>
-                    <div>123123123</div>
+                    <div className="flex">
+                        <div className="basis-1/2 p-4">
+                            <CommandListView/>
+                        </div>
+                        <div className="basis-1/2 p-4">
+                            <PackageListView/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <TerminalView/>
