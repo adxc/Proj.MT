@@ -6,18 +6,14 @@
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
 import React from 'react';
-import ListItem from '@mui/material/ListItem';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
+import BaseListItem from "@components/BaseListItem";
 
-function renderRow(props: ListChildComponentProps) {
-    const { index, style } = props;
-
+function renderRow(props:ListChildComponentProps){
     return (
-        <ListItem style={style} key={index} component="div" disablePadding>
-           123
-        </ListItem>
-    );
+        <BaseListItem {...props} itemInfo={{}} type='command'/>
+    )
 }
 
 const CommandListView = function () {

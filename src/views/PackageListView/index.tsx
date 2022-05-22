@@ -13,7 +13,7 @@ import BaseListItem from "@components/BaseListItem";
 const PackageListView = function () {
     function renderRow(props:ListChildComponentProps){
         return (
-            <BaseListItem {...props}/>
+            <BaseListItem {...props} itemInfo={{}} type='package'/>
         )
     }
     return (

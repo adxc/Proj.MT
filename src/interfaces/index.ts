@@ -8,6 +8,7 @@
 *   /_/\_\ |_|    \___| |_| |_|  \___| |_| |_|
 */
 import { ReactNode } from 'react';
+import { ListChildComponentProps } from "react-window";
 export interface IProjectTabs {
     projectList: any[];
 }
@@ -33,4 +34,12 @@ export interface ITabPanelProps{
     value: number;
     classes?: string | string[];
     children?: ReactNode;
+}
+export interface IBaseListItemProps extends ListChildComponentProps{
+    onDelete?: (itemInfo:any) => void;
+    onControl?: (type:string,itemInfo:any) => void;
+    onUpdate?: (itemInfo:any) => void;
+    itemInfo: any;
+    type: string;
+    status?: string;
 }

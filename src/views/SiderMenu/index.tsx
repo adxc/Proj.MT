@@ -17,17 +17,21 @@ import ProjectItem from '@components/ProjectItem'
 import {ISiderMenuProps} from "@interfaces";
 
 const actions = [
-	{ icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16} />, name: '导入' },
-	{ icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16} />, name: '新建' },
+	{ icon: <FontAwesomeIcon icon={faFileUpload} fontSize={16} />, name: '导入',type: 'import' },
+	{ icon: <FontAwesomeIcon icon={faFolderPlus} fontSize={16} />, name: '新建',type: 'create' },
 ]
 const SiderMenu: FC<ISiderMenuProps> = function ({openProject}) {
 	const [openIndex, setOpenIndex] = useState<any>(1)
 	function handleOpen(pid: any, name: string) {
 		openProject({ pid, name })
 		setOpenIndex(pid)
-		// window.electronAPI.openFolder().then((res: any) => {
-		// 	console.log(res)
-		// })
+	}
+	function handleClick(type:string) {
+		if(type === 'import'){
+			window.electronAPI.openFolder().then((res: any) => {
+				console.log(res)
+			})
+		}
 	}
 	return (
 		<div className="basis-60 h-full bg-[#41106C] shadow-md shadow-[#41106C] p-4 flex flex-col">
@@ -57,6 +61,7 @@ const SiderMenu: FC<ISiderMenuProps> = function ({openProject}) {
 						key={action.name}
 						icon={action.icon}
 						tooltipTitle={action.name}
+						onClick={() => handleClick(action.type)}
 					/>
 				))}
 			</SpeedDial>
