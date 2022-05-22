@@ -23,7 +23,7 @@ const MainView:FC<IMain> = function({isOpen, openProject}){
     useEffect(() =>{
         api({
             to: {
-                width: isOpen ? "260px" : '0px',
+                width: isOpen ? "0px" : '260px',
             }
         })
     },[isOpen])
