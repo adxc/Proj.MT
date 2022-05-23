@@ -9,7 +9,17 @@ function handleFolderOpen() {
 				}
 			})
 }
+function queryAllProjectList() {
+}
+function queryProjectDetails(e,pid) {
+	return pid
+}
+function createNewProject(e,params) {
 
+}
 module.exports = function initialiseEventListeners() {
 	ipcMain.handle('dialog:openFolder', handleFolderOpen)
+	ipcMain.handle('queryAllProjectList', queryAllProjectList)
+	ipcMain.handle('queryProjectDetails', queryProjectDetails)
+	ipcMain.handle('createNewProject', createNewProject)
 }
