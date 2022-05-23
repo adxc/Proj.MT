@@ -31,6 +31,7 @@
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.7",
     "shelljs": "^0.8.5",
+    "sqlite3": "^5.0.8",
     "uuid": "^8.3.2",
     "xterm": "^4.18.0",
     "xterm-addon-fit": "^0.5.0"
