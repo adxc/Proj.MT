@@ -79,8 +79,8 @@ function initializeProject() {
 }
 module.exports = {
 	createNewProject,
-	queryProject,
 	creatNewProjectName,
+	queryProject,
 	insertProject,
 	deleteProject,
 	initializeProject,
