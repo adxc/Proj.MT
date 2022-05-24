@@ -20,16 +20,18 @@ async function createNewProjectByImport(path) {
 	const name = creatNewProjectName(path)
 	const pid = createNewProject()
 	/**储存 */
-	// insertProject({
-	// 	name,
-	// 	pid,
-	// 	sizes,
-	// })
+	insertProject({
+		name,
+		pid,
+		sizes,
+		path,
+	})
 	return {
 		name,
 		pid,
 		sizes,
 		scripts,
+		path,
 	}
 }
 module.exports = {

@@ -8,8 +8,9 @@
  *   /_/\_\ |_|    \___| |_| |_|  \___| |_| |_|
  */
 const { v4: uuidv4 } = require('uuid')
-const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database(':memory:')
+const Store = require('electron-store')
+
+const store = new Store()
 /**
  *
  * 创建项目生成pid
@@ -26,18 +27,34 @@ function createNewProject() {
 function creatNewProjectName(path) {
 	return path.split('/').pop()
 }
-function queryProjectByPid(path) {
-	return null
+
+function queryProject(path) {
+	return store.get(path)
 }
-function insertProject(projectInfo) {
-	db.run('UPDATE tbl SET name = $name WHERE id = $id', {
-		$id: projectInfo.pid,
-		$name: projectInfo.name,
-	})
+/**
+ *项目信息持久化储存
+ * @param {
+ * size
+ * path
+ * pid
+ * script
+ * name
+ * } info
+ */
+function insertProject(info) {
+	store.set(info.path, info)
+}
+
+/**
+ * 删除项目
+ */
+function deleteProject(path) {
+	store.delete(path)
 }
 module.exports = {
 	createNewProject,
-	queryProjectByPid,
+	queryProject,
 	creatNewProjectName,
 	insertProject,
+	deleteProject,
 }
