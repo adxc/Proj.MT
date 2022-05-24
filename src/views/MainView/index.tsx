@@ -7,7 +7,6 @@
 */
 import React, {FC, useEffect} from 'react';
 import SiderMenu from '../SiderMenu';
-import TerminalView from "../TerminalView";
 import {IMain} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
 import TabPanel from '@components/TabPanel';

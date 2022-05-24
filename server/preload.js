@@ -12,4 +12,13 @@ contextBridge.exposeInMainWorld('electronAPI', {
       callback(data);
     });
   },
+  queryAllProjectList:() => {
+    return ipcRenderer.invoke('queryAllProjectList');
+  },
+  queryProjectDetails:(pid) => {
+    return ipcRenderer.invoke('queryProjectDetails', pid);
+  },
+  createNewProject:(params) => {
+    return ipcRenderer.invoke('createNewProject', params);
+  }
 });

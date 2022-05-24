@@ -25,6 +25,9 @@ const SiderMenu: FC<ISiderMenuProps> = function ({openProject}) {
 	function handleOpen(pid: any, name: string) {
 		openProject({ pid, name })
 		setOpenIndex(pid)
+		window.electronAPI.queryProjectDetails(pid).then((res: any) => {
+			console.log(res)
+		})
 	}
 	function handleClick(type:string) {
 		if(type === 'import'){
