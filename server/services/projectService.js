@@ -11,6 +11,8 @@ const { v4: uuidv4 } = require('uuid')
 const Store = require('electron-store')
 
 const store = new Store()
+// 项目数据命名空间
+const STORE_PROJECT = 'PROJECT'
 /**
  *
  * 创建项目生成pid
@@ -28,8 +30,8 @@ function creatNewProjectName(path) {
 	return path.split('/').pop()
 }
 
-function queryProject(path) {
-	return store.get(path)
+function queryProject(pid) {
+	return store.get(`${STORE_PROJECT}.${pid}`)
 }
 /**
  *项目信息持久化储存
@@ -42,14 +44,22 @@ function queryProject(path) {
  * } info
  */
 function insertProject(info) {
-	store.set(info.path, info)
+	const allStore = store.store[STORE_PROJECT] || {}
+	Object.keys(allStore).some((i) => {
+		if (allStore[i].path === info.path) {
+			deleteProject(allStore[i].pid)
+			return true
+		}
+		return false
+	})
+	store.set(`${STORE_PROJECT}.${info.pid}`, info)
 }
 
 /**
  * 删除项目
  */
-function deleteProject(path) {
-	store.delete(path)
+function deleteProject(pid) {
+	store.delete(`${STORE_PROJECT}.${pid}`)
 }
 module.exports = {
 	createNewProject,
