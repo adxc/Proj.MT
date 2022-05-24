@@ -29,7 +29,11 @@ function createNewProject() {
 function creatNewProjectName(path) {
 	return path.split('/').pop()
 }
-
+/**
+ * 查询项目详细信息
+ * @param {*} pid
+ * @returns Object
+ */
 function queryProject(pid) {
 	return store.get(`${STORE_PROJECT}.${pid}`)
 }
@@ -61,10 +65,23 @@ function insertProject(info) {
 function deleteProject(pid) {
 	store.delete(`${STORE_PROJECT}.${pid}`)
 }
+/**
+ * 初始化项目
+ */
+function initializeProject() {
+	const allStore = store.store[STORE_PROJECT] || {}
+	const projects = Object.keys(allStore).map((i) => ({
+		name: allStore[i].name,
+		pid: allStore[i].pid,
+		path: allStore[i].path,
+	}))
+	return projects
+}
 module.exports = {
 	createNewProject,
 	queryProject,
 	creatNewProjectName,
 	insertProject,
 	deleteProject,
+	initializeProject,
 }
