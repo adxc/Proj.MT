@@ -12,11 +12,14 @@ const {
 	createNewProject,
 	creatNewProjectName,
 	insertProject,
+	initializeProject,
+	queryProject
 } = require('../services/projectService')
-const { geFileListSize, getPackage } = require('../utils')
+const { geFileListSize, getPackage} = require('../utils')
 async function createNewProjectByImport(path) {
 	const sizes = geFileListSize(path)
-	const package = await getPackage(path)
+	const packageList = await getPackage(path)
+	const commandList = []
 	const name = creatNewProjectName(path)
 	const pid = createNewProject()
 	/**储存 */
@@ -24,7 +27,8 @@ async function createNewProjectByImport(path) {
 		name,
 		pid,
 		sizes,
-		package,
+		packageList,
+		commandList,
 		path,
 	}
 	insertProject(info)
@@ -33,6 +37,14 @@ async function createNewProjectByImport(path) {
 		pid,
 	}
 }
+function queryAllProjectList() {
+	return initializeProject()
+}
+function queryProjectInfo(pid) {
+	return queryProject(pid)
+}
 module.exports = {
 	createNewProjectByImport,
+	queryAllProjectList,
+	queryProjectInfo
 }

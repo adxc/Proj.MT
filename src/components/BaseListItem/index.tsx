@@ -46,7 +46,7 @@ const BaseListItem: FC<IBaseListItemProps> = function ({status,type,index, style
             style={style}
             key={index}
         >
-            <ListItemText primary={'123'} secondary={'3333'}/>
+            <ListItemText primary={itemInfo.name} secondary={itemInfo.value}/>
             {randerRadio()}
         </ListItem>
     )

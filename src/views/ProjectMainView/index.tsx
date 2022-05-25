@@ -5,7 +5,7 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React from 'react';
+import React, { FC } from 'react';
 import TerminalView from "../TerminalView";
 import ReactLogo from '../../assets/images/react.svg';
 import Vite from '../../favicon.svg'
@@ -14,12 +14,13 @@ import PackageListView from "../PackageListView";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
+import {IProject} from "@interfaces";
 
-const ProjectMainView = function () {
+const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList,path,sizes}) {
     return (
         <div>
             <div className="px-10">
-                <div className="font-[butter-sans]  text-[36px] mt-10 text-white">Demo</div>
+                <div className="font-[butter-sans]  text-[36px] mt-10 text-white">{name}</div>
                 <Paper elevation={3}
                        sx={{
                            background:'transparent'
@@ -32,7 +33,7 @@ const ProjectMainView = function () {
                             </div>
                             <div className="w-full flex flex-col justify-center items-center text-white">
                                 <p className="text-sm">项目大小</p>
-                                28.5Mb
+                                {sizes}
                             </div>
                             <div className="w-full flex justify-center items-center text-4xl">
                                 <SettingsOutlinedIcon fontSize="inherit" className="cursor-pointer"/>
@@ -40,10 +41,10 @@ const ProjectMainView = function () {
                         </div>
                         <div className="flex">
                             <div className="basis-1/2 p-4">
-                                <CommandListView/>
+                                <CommandListView commandList={commandList}/>
                             </div>
                             <div className="basis-1/2 p-4">
-                                <PackageListView/>
+                                <PackageListView packageList={packageList}/>
                             </div>
                         </div>
                     </div>

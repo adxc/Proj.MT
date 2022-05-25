@@ -12,18 +12,17 @@ import { ListChildComponentProps } from "react-window";
 export interface IProjectTabs {
     projectList: any[];
 }
-export interface IHeader extends IProjectTabs{
+export interface IHeader {
     isOpen: boolean;
     handleOpen: () => void;
 }
 export interface ISiderMenuProps{
-    openProject: (project:any) => void;
+    handlePreview: (pid:any) => void;
 }
 export interface IMain {
     isOpen: boolean;
-    openProject: (project:any) => void;
 }
-export interface IProject {
+export interface IProjectItemProps {
     isOpen: boolean;
     name: string;
     pid: any;
@@ -42,4 +41,29 @@ export interface IBaseListItemProps extends ListChildComponentProps{
     itemInfo: any;
     type: string;
     status?: string;
+}
+export interface IListItem {
+    name?: string;
+    value?: string;
+}
+export interface ICommandViewProps{
+    commandList: IListItem[]
+}
+
+export interface IPackageViewProps{
+    packageList: IListItem[]
+}
+export interface IProjectBase{
+    name:string;
+    pid:string;
+}
+export interface IProject extends IProjectBase{
+    packageList: any[];
+    commandList: any[];
+    path: string;
+    sizes: string;
+    type?: string;
+}
+export interface IProjectStore{
+    projectList: IProjectBase[];
 }

@@ -5,14 +5,22 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import SiderMenu from '../SiderMenu';
-import {IMain} from "@interfaces";
+import {IMain, IProject} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
 import TabPanel from '@components/TabPanel';
 import ProjectMainView from "../ProjectMainView";
 
-const MainView:FC<IMain> = function({isOpen, openProject}){
+const MainView:FC<IMain> = function({isOpen}){
+    const [preview, setPreview] = useState<IProject>({
+        pid: '',
+        name: '',
+        path: '',
+        commandList: [],
+        packageList: [],
+        sizes: '',
+    });
     const [styles,api] = useSpring(() => ({
         from: {
             width: "0px",
@@ -22,16 +30,23 @@ const MainView:FC<IMain> = function({isOpen, openProject}){
     useEffect(() =>{
         api({
             to: {
-                width: isOpen ? "0px" : '260px',
+                width: isOpen ? "260px" : '0px',
             }
         })
     },[isOpen])
+    function handlePreview(pid:any){
+        window.electronAPI.queryProjectDetails(pid).then((res: any) => {
+            setPreview(res)
+        })
+    }
     return (
         <div className="flex h-[calc(100vh-3rem)]">
-            <animated.div style={styles} className="overflow-hidden"><SiderMenu openProject={openProject}/></animated.div>
+            <animated.div style={styles} className="overflow-hidden"><SiderMenu handlePreview={handlePreview}/></animated.div>
             <div className="h-full relative w-full">
                 <TabPanel value={0} index={0}>
-                    <ProjectMainView/>
+                    {
+                        preview.pid && <ProjectMainView {...preview}/>
+                    }
                 </TabPanel>
             </div>
         </div>

@@ -1,5 +1,5 @@
 const { dialog, ipcMain } = require('electron')
-const { createNewProjectByImport } = require('../controller/project')
+const { createNewProjectByImport,queryAllProjectList,queryProjectInfo } = require('../controller/project')
 function handleFolderOpen() {
 	return dialog.showOpenDialog({
 				properties: ['openDirectory'],
@@ -9,10 +9,9 @@ function handleFolderOpen() {
 				}
 			})
 }
-function queryAllProjectList() {
-}
+
 function queryProjectDetails(e,pid) {
-	return pid
+	return queryProjectInfo(pid)
 }
 function createNewProject(e,params) {
 
