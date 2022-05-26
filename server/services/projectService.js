@@ -27,6 +27,16 @@ const store = new Store()
  * }
  */
 const STORE_PROJECT = 'PROJECT'
+
+/**
+ *
+ * 获取store PROJECT
+ * @returns store
+ */
+function getStoreProject() {
+	return store.store[STORE_PROJECT] || {}
+}
+
 /**
  *
  * 创建项目生成pid
@@ -84,7 +94,7 @@ function deleteProject(pid) {
  * 初始化项目
  */
 function initializeProject() {
-	const allStore = store.store[STORE_PROJECT] || {}
+	const allStore = getStoreProject()
 	const projects = Object.keys(allStore).map((i) => ({
 		name: allStore[i].name,
 		pid: allStore[i].pid,
@@ -92,6 +102,7 @@ function initializeProject() {
 	}))
 	return projects
 }
+
 async function getProjectInfo(path) {
 	const sizes = geFileListSize(path)
 	const { commandList, packageList, projectTypes } = await getPackage(path)
@@ -110,10 +121,17 @@ async function getProjectInfo(path) {
 	return info
 }
 /**
- *更新package相关
+ *更新store里package相关
  */
-function updatePackage(path) {
-	getPackage
+async function updateStorePackage(pid) {
+	const { path } = queryProject(pid)
+	const { commandList, packageList, projectTypes } = await getPackage(path)
+	store.set(`${STORE_PROJECT}.${pid}`, {
+		...getStoreProject,
+		commandList,
+		packageList,
+		projectTypes,
+	})
 }
 module.exports = {
 	createNewProject,
@@ -123,4 +141,5 @@ module.exports = {
 	deleteProject,
 	initializeProject,
 	getProjectInfo,
+	updateStorePackage,
 }
