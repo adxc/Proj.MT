@@ -52,6 +52,7 @@ function insertProject(info) {
 	Object.keys(allStore).some((i) => {
 		if (allStore[i].path === info.path) {
 			deleteProject(allStore[i].pid)
+			//todo:提示路径重复
 			return true
 		}
 		return false

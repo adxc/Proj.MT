@@ -63,20 +63,28 @@ async function getScript(path) {
 		})
 	})
 }
+function formateObjectToArray(objectInfo) {
+	return Object.keys(objectInfo).map((i) => ({
+		name: i,
+		value: objectInfo[i],
+	}))
+}
+const TYPE = ['react', 'vue', 'angular']
 async function getPackage(path) {
 	return new Promise((r, j) => {
 		fs.readFile(path + '/package.json', function (err, data) {
 			const allPackage = JSON.parse(data)
-			const package = {
-				...allPackage.script,
+
+			const dependenciesPackage = {
 				...allPackage.dependencies,
 				...allPackage.devDependencies,
 			}
-			const packageArr = Object.keys(package).map((i) => ({
-				name: i,
-				value: package[i],
-			}))
-			r(packageArr)
+			const projectTypes = Object.keys(allPackage.dependencies).filter((i) =>
+				TYPE.includes(i)
+			)
+			const scripts = formateObjectToArray(allPackage.scripts)
+			const packageList = formateObjectToArray(dependenciesPackage)
+			r({ scripts, packageList, projectTypes })
 		})
 	})
 }
