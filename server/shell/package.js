@@ -6,7 +6,7 @@ const {
 	queryProject,
 	updateStorePackage,
 } = require('../services/projectService.js')
-const INSTALL_UPDATE = ['install', 'update']
+const INSTALL_UPDATE_UN = ['install', 'update','uninstall']
 /**
  * 更新或者安装包的公共方法
  * @param {
@@ -28,7 +28,7 @@ function installOrUpdatePackage(type, params) {.
         const dev = isDev ? '-D' : ''
         shell.cd(path)
         const child = shell.exec(
-            `npm ${INSTALL_UPDATE[type]} ${packageName}@${version} ${dev}`,
+            `npm ${INSTALL_UPDATE_UN[type]} ${packageName}@${version} ${dev}`,
             {
                 silent: false,
                 async: true,
@@ -66,6 +66,17 @@ function updatePackage(params) {
 	installOrUpdatePackage(1, params)
 }
 /**
+ *卸载包
+ * @param {
+ * pid:唯一标识
+ * packageName:包名称
+ * version:包版本
+ * } params
+ */
+ function uninstallPackage(params) {
+	installOrUpdatePackage(2, params)
+}
+/**
  *更新包
  * @param {
  * pid:唯一标识
@@ -97,6 +108,8 @@ function getPackageVersionsByNpm(params) {
 module.exports = {
 	installPackage,
 	updatePackage,
+    uninstallPackage,
+    getPackageVersionsByNpm
 }
 // getPackageVersionsByNpm({
 // 	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
