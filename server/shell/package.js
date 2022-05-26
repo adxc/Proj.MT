@@ -118,7 +118,7 @@ module.exports = {
 	uninstallPackage,
 	getPackageVersionsByNpm,
 }
-getPackageVersionsByNpm({
-	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
-	packageName: 'react',
-})
+// getPackageVersionsByNpm({
+// 	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
+// 	packageName: 'react',
+// })
