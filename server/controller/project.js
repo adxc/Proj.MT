@@ -14,11 +14,23 @@ const {
 	insertProject,
 	initializeProject,
 	queryProject,
-	getProjectInfo,
 } = require('../services/projectService')
 const { geFileListSize, getPackage } = require('../utils')
 async function createNewProjectByImport(path) {
-	const info = getProjectInfo(path)
+	const sizes = geFileListSize(path)
+	const { commandList, packageList, projectTypes } = await getPackage(path)
+	const name = creatNewProjectName(path)
+	const pid = createNewProject()
+	/**储存 */
+	const info = {
+		name,
+		pid,
+		sizes,
+		packageList,
+		projectTypes,
+		commandList,
+		path,
+	}
 	insertProject(info)
 	return {
 		name,
