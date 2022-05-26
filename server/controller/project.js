@@ -18,7 +18,7 @@ const {
 } = require('../services/projectService')
 const { geFileListSize, getPackage } = require('../utils')
 async function createNewProjectByImport(path) {
-	const info = getProjectInfo()
+	const info = getProjectInfo(path)
 	insertProject(info)
 	return {
 		name,
