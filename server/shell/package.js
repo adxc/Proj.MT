@@ -6,7 +6,7 @@ const {
 	queryProject,
 	updateStorePackage,
 } = require('../services/projectService.js')
-const INSTALL_UPDATE_UN = ['install', 'update','uninstall']
+const INSTALL_UPDATE_UN = ['install', 'update', 'uninstall']
 /**
  * 更新或者安装包的公共方法
  * @param {
@@ -21,25 +21,28 @@ const INSTALL_UPDATE_UN = ['install', 'update','uninstall']
  * } params
 
  */
-function installOrUpdatePackage(type, params) {.
-    return new Promise((r,j)=>{
-        const { pid, packageName, version = 'latest', isDev = false } = params
-        const path = queryProject(pid)?.path
-        const dev = isDev ? '-D' : ''
-        shell.cd(path)
-        const child = shell.exec(
-            `npm ${INSTALL_UPDATE_UN[type]} ${packageName}@${version} ${dev}`,
-            {
-                silent: false,
-                async: true,
-            },function (code, stdout, stderr) {
-                updateStorePackage(pid)
-                r(code)
-            }
-        )
-    
-    })
-	
+function installOrUpdatePackage(type, params) {
+	return new Promise((r, j) => {
+		const { pid, packageName, version = 'latest', isDev = false } = params
+		const path = queryProject(pid)?.path
+		const dev = isDev ? '-D' : ''
+		shell.cd(path)
+		const child = shell.exec(
+			`npm ${INSTALL_UPDATE_UN[type]} ${packageName}@${version} ${dev}`,
+			{
+				silent: false,
+				async: true,
+			},
+			function (code, stdout, stderr) {
+				if (stderr) {
+					j(stderr)
+					return
+				}
+				updateStorePackage(pid)
+				r(stdout)
+			}
+		)
+	})
 }
 /**
  *安装包
@@ -73,7 +76,7 @@ function updatePackage(params) {
  * version:包版本
  * } params
  */
- function uninstallPackage(params) {
+function uninstallPackage(params) {
 	installOrUpdatePackage(2, params)
 }
 /**
@@ -96,6 +99,10 @@ function getPackageVersionsByNpm(params) {
 				silent: true,
 			},
 			function (code, stdout, stderr) {
+				if (stderr) {
+					j(stderr)
+					return
+				}
 				const versions = stdout
 					.split(',\n')
 					.filter((i) => i.indexOf('-') < 0)
@@ -108,10 +115,10 @@ function getPackageVersionsByNpm(params) {
 module.exports = {
 	installPackage,
 	updatePackage,
-    uninstallPackage,
-    getPackageVersionsByNpm
+	uninstallPackage,
+	getPackageVersionsByNpm,
 }
-// getPackageVersionsByNpm({
-// 	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
-// 	packageName: 'react',
-// })
+getPackageVersionsByNpm({
+	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
+	packageName: 'react',
+})
