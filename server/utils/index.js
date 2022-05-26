@@ -82,9 +82,9 @@ async function getPackage(path) {
 			const projectTypes = Object.keys(allPackage.dependencies).filter((i) =>
 				TYPE.includes(i)
 			)
-			const scripts = formateObjectToArray(allPackage.scripts)
+			const commandList = formateObjectToArray(allPackage.scripts)
 			const packageList = formateObjectToArray(dependenciesPackage)
-			r({ scripts, packageList, projectTypes })
+			r({ commandList, packageList, projectTypes })
 		})
 	})
 }

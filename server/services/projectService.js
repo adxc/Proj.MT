@@ -9,9 +9,23 @@
  */
 const { v4: uuidv4 } = require('uuid')
 const Store = require('electron-store')
+const { update } = require('react-spring')
+const { getPackage, geFileListSize } = require('../utils')
 
 const store = new Store()
-// 项目数据命名空间
+/**
+ * 项目数据命名空间 包含信息如下:
+ * {
+ * name,
+ *pid,
+ *sizes,
+ *packageList,
+ *projectTypes,
+ *commandList,
+ *path,
+ *scripts,
+ * }
+ */
 const STORE_PROJECT = 'PROJECT'
 /**
  *
@@ -78,6 +92,29 @@ function initializeProject() {
 	}))
 	return projects
 }
+async function getProjectInfo(path) {
+	const sizes = geFileListSize(path)
+	const { commandList, packageList, projectTypes } = await getPackage(path)
+	const name = creatNewProjectName(path)
+	const pid = createNewProject()
+	/**储存 */
+	const info = {
+		name,
+		pid,
+		sizes,
+		packageList,
+		projectTypes,
+		commandList,
+		path,
+	}
+	return info
+}
+/**
+ *更新package相关
+ */
+function updatePackage(path) {
+	getPackage
+}
 module.exports = {
 	createNewProject,
 	creatNewProjectName,
@@ -85,4 +122,5 @@ module.exports = {
 	insertProject,
 	deleteProject,
 	initializeProject,
+	getProjectInfo,
 }
