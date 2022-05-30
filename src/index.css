@@ -45,3 +45,9 @@ code {
 .MuiTabs-scroller >.MuiTabs-indicator{
   background: #FE7179;
 }
+.MuiMenu-root >.MuiPaper-root{
+  min-width: 220px;
+}
+.MuiMenu-list > .MuiMenuItem-root{
+  justify-content: space-between;
+}

@@ -1,5 +1,5 @@
 const { dialog, ipcMain } = require('electron')
-const { createNewProjectByImport,queryAllProjectList,queryProjectInfo } = require('../controller/project')
+const { createNewProjectByImport,queryAllProjectList,queryProjectInfo,deleteProjectByPid } = require('../controller/project')
 function handleFolderOpen() {
 	return dialog.showOpenDialog({
 				properties: ['openDirectory'],
@@ -13,6 +13,9 @@ function handleFolderOpen() {
 function queryProjectDetails(e,pid) {
 	return queryProjectInfo(pid)
 }
+function deleteProject(e,pid) {
+	deleteProjectByPid(pid)
+}
 function createNewProject(e,params) {
 
 }
@@ -21,4 +24,5 @@ module.exports = function initialiseEventListeners() {
 	ipcMain.handle('queryAllProjectList', queryAllProjectList)
 	ipcMain.handle('queryProjectDetails', queryProjectDetails)
 	ipcMain.handle('createNewProject', createNewProject)
+	ipcMain.handle('deleteProject', deleteProject)
 }

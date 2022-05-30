@@ -4,7 +4,7 @@ import Header from "./views/Header";
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {initProjectList} from "./store/projectSlice";
-
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function App() {
     const dispatch = useDispatch()
@@ -17,10 +17,16 @@ function App() {
         })
     })
     return (
-        <div className="App">
-            <Header isOpen={isOpen} handleOpen={() => setIsOpen(c => !c)}/>
-            <MainView isOpen={isOpen} />
-        </div>
+        <ThemeProvider theme={createTheme({
+            palette: {
+                mode: 'dark',
+            },
+        })}>
+            <div className="App">
+                <Header isOpen={isOpen} handleOpen={() => setIsOpen(c => !c)}/>
+                <MainView isOpen={isOpen} />
+            </div>
+        </ThemeProvider>
     )
 }
 

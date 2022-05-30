@@ -5,7 +5,7 @@
 *      (o o)        :(o o):  .       /(o o)\        (o o)         (o o)         (o o)     
 *  ooO--(_)--Ooo-ooO--(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
 */
-import React, { FC } from 'react';
+import React, {FC, useState} from 'react';
 import TerminalView from "../TerminalView";
 import ReactLogo from '../../assets/images/react.svg';
 import Vite from '../../favicon.svg'
@@ -17,6 +17,10 @@ import Paper from '@mui/material/Paper';
 import {IProject} from "@interfaces";
 
 const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList,path,sizes}) {
+    const [executeCmd, setExecuteCmd] = useState<any>([]);
+    function handleCommand(type:string,command:string){
+        setExecuteCmd([...executeCmd,command])
+    }
     return (
         <div>
             <div className="px-10">
@@ -41,7 +45,7 @@ const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList
                         </div>
                         <div className="flex">
                             <div className="basis-1/2 p-4">
-                                <CommandListView commandList={commandList}/>
+                                <CommandListView commandList={commandList} onClick={handleCommand}/>
                             </div>
                             <div className="basis-1/2 p-4">
                                 <PackageListView packageList={packageList}/>
@@ -51,7 +55,7 @@ const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList
                 }/>
 
             </div>
-            <TerminalView/>
+            <TerminalView executeCmd={executeCmd} path={path}/>
         </div>
     );
 };

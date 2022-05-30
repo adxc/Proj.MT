@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from "react";
+import {FC, useEffect, useMemo, useRef, useState} from "react";
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import ArrowCircleDownSharpIcon from '@mui/icons-material/ArrowCircleDownSharp';
@@ -9,7 +9,7 @@ import chalk from 'chalk';
 import { useSpring, animated } from 'react-spring'
 import classNames from "classnames";
 
-const TerminalView = function (){
+const TerminalView:FC<any> = function ({executeCmd,path}){
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const terminalRef = useRef<HTMLDivElement>(null);
     const styles = useSpring({transition: 'height .5s',})
@@ -32,14 +32,19 @@ const TerminalView = function (){
       fitAddon.fit();
       term.writeln(`Welcome to ${chalk.red('Proj.MT')}`);
       term.focus();
-      window.electronAPI.sendTerminalData('\n')
+      window.electronAPI.receiveTerminalData((data: string | Uint8Array) =>{
+          term.write(data)
+      })
+      term.onData(data =>{
+          window.electronAPI.sendTerminalData(data)
+      })
+      window.electronAPI.sendTerminalData(`cd ${path}\n`)
   },[])
-    window.electronAPI.receiveTerminalData((data: string | Uint8Array) =>{
-        term.write(data)
-    })
-    term.onData(data =>{
-        window.electronAPI.sendTerminalData(data)
-    })
+    useEffect(() => {
+        if(executeCmd.length > 0){
+            window.electronAPI.sendTerminalData(`npm run ${executeCmd[0].name}\n`)
+        }
+    } ,[executeCmd])
     function handleCollapse(){
         setIsCollapsed(!isCollapsed)
     }

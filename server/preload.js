@@ -20,5 +20,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
   createNewProject:(params) => {
     return ipcRenderer.invoke('createNewProject', params);
+  },
+  deleteProject:(pid) => {
+    return ipcRenderer.invoke('deleteProject', pid);
   }
 });

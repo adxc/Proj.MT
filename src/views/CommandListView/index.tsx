@@ -11,10 +11,11 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import BaseListItem from '@components/BaseListItem'
 import { ICommandViewProps } from '@interfaces'
 
-const CommandListView: FC<ICommandViewProps> = function ({ commandList }) {
+const CommandListView: FC<ICommandViewProps> = function ({ commandList,onClick }) {
+
 	function renderRow(props: ListChildComponentProps) {
 		const { data, index } = props
-		return <BaseListItem {...props} itemInfo={data[index]} type="package" />
+		return <BaseListItem {...props} itemInfo={data[index]} type="command" onControl={onClick}/>
 	}
 	return (
 		<div>
@@ -28,6 +29,7 @@ const CommandListView: FC<ICommandViewProps> = function ({ commandList }) {
 							height={height}
 							width={width}
 							itemSize={46}
+							itemData={commandList}
 							itemCount={commandList?.length}
 							overscanCount={5}
 						>

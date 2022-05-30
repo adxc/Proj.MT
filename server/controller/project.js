@@ -13,6 +13,7 @@ const {
 	initializeProject,
 	queryProject,
 	getProjectInfo,
+	deleteProject,
 } = require('../services/projectService')
 
 async function createNewProjectByImport(path) {
@@ -29,8 +30,12 @@ function queryAllProjectList() {
 function queryProjectInfo(pid) {
 	return queryProject(pid)
 }
+function deleteProjectByPid(pid) {
+	return deleteProject(pid)
+}
 module.exports = {
 	createNewProjectByImport,
 	queryAllProjectList,
 	queryProjectInfo,
+	deleteProjectByPid
 }

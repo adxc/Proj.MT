@@ -13,7 +13,7 @@ import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
 import BrowserUpdatedOutlinedIcon from '@mui/icons-material/BrowserUpdatedOutlined';
-const BaseListItem: FC<IBaseListItemProps> = function ({status,type,index, style, itemInfo,onControl,onDelete,onUpdate}) {
+const BaseListItem: FC<IBaseListItemProps> = function ({status,type,index, style, itemInfo,onDelete,onUpdate,onControl}) {
     function randerRadio(){
         if(type === 'package'){
             return (

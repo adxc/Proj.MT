@@ -27,6 +27,7 @@ export interface IProjectItemProps {
     name: string;
     pid: any;
     openProject: (pid:any, name:string) => void;
+    onDelete: (pid:string) => void;
 }
 export interface ITabPanelProps{
     index: number;
@@ -47,7 +48,8 @@ export interface IListItem {
     value?: string;
 }
 export interface ICommandViewProps{
-    commandList: IListItem[]
+    commandList: IListItem[],
+    onClick: (type:string,cmd:any) => void;
 }
 
 export interface IPackageViewProps{

@@ -16,7 +16,7 @@ import { faFolderPlus, faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import ProjectItem from '@components/ProjectItem'
 import {useSelector, useDispatch} from "react-redux";
 import {RootState} from "../../store";
-import { addProject } from "../../store/projectSlice";
+import { addProject ,removeProject} from "../../store/projectSlice";
 import {IProjectBase, ISiderMenuProps} from "@interfaces";
 
 
@@ -41,6 +41,11 @@ const SiderMenu: FC<ISiderMenuProps> = function ({handlePreview}) {
 			})
 		}
 	}
+	function handleDelete(pid: string) {
+		window.electronAPI.deleteProject(pid).then(() => {
+			dispatch(removeProject(pid))
+		})
+	}
 	return (
 		<div className="basis-60 h-full bg-[#41106C] shadow-md shadow-[#41106C] p-4 flex flex-col">
 			<TextField
@@ -59,7 +64,7 @@ const SiderMenu: FC<ISiderMenuProps> = function ({handlePreview}) {
 			<div className="my-5 h-4/5">
 				{
 					projectList.map((item:IProjectBase) => (
-						<ProjectItem key={item.pid} name={item.name} pid={item.pid} openProject={handleOpen} isOpen={openIndex === item.pid}/>
+						<ProjectItem key={item.pid} name={item.name} pid={item.pid} onDelete={handleDelete} openProject={handleOpen} isOpen={openIndex === item.pid}/>
 					))
 				}
 			</div>

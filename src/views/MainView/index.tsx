@@ -36,6 +36,7 @@ const MainView:FC<IMain> = function({isOpen}){
     },[isOpen])
     function handlePreview(pid:any){
         window.electronAPI.queryProjectDetails(pid).then((res: any) => {
+            console.log(res)
             setPreview(res)
         })
     }
