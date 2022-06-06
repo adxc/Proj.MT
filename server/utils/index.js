@@ -73,6 +73,10 @@ const TYPE = ['react', 'vue', 'angular']
 async function getPackage(path) {
 	return new Promise((r, j) => {
 		fs.readFile(path + '/package.json', function (err, data) {
+			if (err) {
+				j(err)
+				return
+			}
 			const allPackage = JSON.parse(data)
 
 			const dependenciesPackage = {

@@ -104,20 +104,34 @@ function initializeProject() {
 }
 
 async function getProjectInfo(path) {
-	const sizes = geFileListSize(path)
-	const { commandList, packageList, projectTypes } = await getPackage(path)
-	const name = creatNewProjectName(path)
-	const pid = createNewProject()
-	/**储存 */
-	const info = {
-		name,
-		pid,
-		sizes,
-		packageList,
-		projectTypes,
-		commandList,
-		path,
+	let info = {
+		name: '',
+		pid: '',
+		size: '',
+		packageList: [],
+		projectTypes: [],
+		commandList: '',
+		path: '',
 	}
+	try {
+		const sizes = geFileListSize(path)
+		const { commandList, packageList, projectTypes } = await getPackage(path)
+		const name = creatNewProjectName(path)
+		const pid = createNewProject()
+		/**储存 */
+		info = {
+			name,
+			pid,
+			sizes,
+			packageList,
+			projectTypes,
+			commandList,
+			path,
+		}
+	} catch (error) {
+		console.error(error)
+	}
+
 	return info
 }
 /**
