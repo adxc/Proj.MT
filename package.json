@@ -10,7 +10,7 @@
 		"start": "electron .",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
-		"rebuild": "electron-rebuild",
+		"rebuild": "electron-rebuild -f -w node-pty",
 		"pack": "electron-builder --dir",
 		"postinstall": "electron-builder install-app-deps",
 		"dist": "electron-builder",
@@ -34,6 +34,9 @@
 			]
 		}
 	},
+	"includeSubNodeModules": true,
+	"buildDependenciesFromSource": true,
+	"nodeGypRebuild": true,
 	"dependencies": {
 		"@emotion/react": "^11.9.0",
 		"@emotion/styled": "^11.8.1",
@@ -50,8 +53,8 @@
 		"electron-store": "^8.0.1",
 		"node-pty": "^0.10.1",
 		"normalize.css": "^8.0.1",
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
 		"react-redux": "^8.0.2",
 		"react-spring": "^9.4.5",
 		"react-virtualized-auto-sizer": "^1.0.6",
