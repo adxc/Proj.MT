@@ -24,14 +24,24 @@ function createWindow() {
 		show: false, // new BrowserWindow创建后先隐藏
 	})
 	// 加载页面 process.env.ELECTRON_START_URL
-	const startUrl = 'http://localhost:3001'
-	win.loadURL(startUrl)
+
+	if (!app.isPackaged) {
+		win.loadURL(`http://localhost:3001`)
+		win.webContents.openDevTools()
+	} else {
+		win.loadURL(
+			url.format({
+				pathname: path.join(__dirname, 'index.html'),
+				protocol: 'file',
+				slashes: true,
+			})
+		)
+	}
 	//关闭页面
 	win.on('closed', function () {
 		win = null
 	})
-	// 开发者工具
-	win.openDevTools()
+
 	win.on('ready-to-show', function () {
 		win.show() // 初始化后再显示
 	})

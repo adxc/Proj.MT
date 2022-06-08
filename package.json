@@ -9,8 +9,8 @@
 	"scripts": {
 		"dev": "vite",
 		"start": "electron .",
-		"build": "tsc && vite build&&cp -r server build&&cp -R mainBuild.js build",
-		"buildWin": "tsc && vite build&&robocopy server build&&robocopy mainBuild.js build",
+		"build": "tsc && vite build&&cp -r server build&&cp -R main.js build",
+		"buildWin": "tsc && vite build&&robocopy server build&&robocopy main.js build",
 		"preview": "vite preview",
 		"rebuild": "electron-rebuild -f -w node-pty",
 		"pack": "electron-builder --dir",
@@ -20,7 +20,7 @@
 		"dist-win64": "electron-builder  --win --x64",
 		"dist-mac": "electron-builder --mac",
 		"dist-linux": "electron-builder --linux",
-		"package": "electron-builder build --mac --win --x64 -c.extraMetadata.main=build/electron.js --publish never"
+		"package": "electron-builder build --mac --win --x64 -c.extraMetadata.main=build/main.js --publish never"
 	},
 	"build": {
 		"appId": "react.example.com",
