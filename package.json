@@ -9,8 +9,8 @@
 	"scripts": {
 		"dev": "vite",
 		"start": "electron .",
-		"build": "tsc && vite build&&cp -r server build&&cp -R electron.js build",
-		"buildWin": "tsc && vite build&&robocopy server build&&robocopy electron.js build",
+		"build": "tsc && vite build&&cp -r server build&&cp -R mainBuild.js build",
+		"buildWin": "tsc && vite build&&robocopy server build&&robocopy mainBuild.js build",
 		"preview": "vite preview",
 		"rebuild": "electron-rebuild -f -w node-pty",
 		"pack": "electron-builder --dir",
