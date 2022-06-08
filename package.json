@@ -15,12 +15,11 @@
 		"rebuild": "electron-rebuild -f -w node-pty",
 		"pack": "electron-builder --dir",
 		"postinstall": "electron-builder install-app-deps",
-		"dist": "electron-builder",
-		"dist-win": "electron-builder  --win --ia32",
-		"dist-win64": "electron-builder  --win --x64",
-		"dist-mac": "electron-builder --mac",
-		"dist-linux": "electron-builder --linux",
-		"package": "electron-builder build --mac --win --x64 -c.extraMetadata.main=build/main.js --publish never"
+		"dist": "electron-builder build --mac --win --x64 -c.extraMetadata.main=build/main.js --publish never",
+		"dist-win": "electron-builder build --win --ia32 -c.extraMetadata.main=build/main.js --publish never",
+		"dist-win64": "electron-builder build --win --x64 -c.extraMetadata.main=build/main.js --publish never",
+		"dist-mac": "electron-builder build --mac -c.extraMetadata.main=build/main.js --publish never",
+		"dist-linux": "electron-builder build --linux -c.extraMetadata.main=build/main.js --publish never"
 	},
 	"build": {
 		"appId": "react.example.com",
