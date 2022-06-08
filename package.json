@@ -10,7 +10,7 @@
 		"dev": "vite",
 		"start": "electron .",
 		"build": "tsc && vite build&&cp -r server build&&cp -R main.js build",
-		"buildWin": "tsc && vite build&&robocopy server build&&robocopy main.js build",
+		"buildWin": "tsc && vite build&&xcopy server build&&xcopy main.js build",
 		"preview": "vite preview",
 		"rebuild": "electron-rebuild -f -w node-pty",
 		"pack": "electron-builder --dir",
