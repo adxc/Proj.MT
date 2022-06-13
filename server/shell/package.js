@@ -111,11 +111,40 @@ function getPackageVersionsByNpm(params) {
 		)
 	})
 }
+/**
+ *执行指定命令
+ * @param {
+ * pid:唯一标识
+ * command:包名称
+ * } params
+ * @return Array[string]
+ */
+function executeCommand(params) {
+	return new Promise((r, j) => {
+		const { pid, command } = params
+		const path = queryProject(pid)?.path
+		shell.cd(path)
+		shell.exec(
+			command,
+			{
+				silent: true,
+			},
+			function (code, stdout, stderr) {
+				if (stderr) {
+					j(stderr)
+					return
+				}
+				r(stdout)
+			}
+		)
+	})
+}
 module.exports = {
 	installPackage,
 	updatePackage,
 	uninstallPackage,
 	getPackageVersionsByNpm,
+	executeCommand,
 }
 // getPackageVersionsByNpm({
 // 	pid: '46b54b41-295d-48e2-8e3a-6648897f904f',
