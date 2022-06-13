@@ -23,5 +23,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
   deleteProject:(pid) => {
     return ipcRenderer.invoke('deleteProject', pid);
+  },
+  resizeTerminal:(cols, rows) => {
+    ipcRenderer.invoke('terminal:resize', cols, rows);
   }
 });

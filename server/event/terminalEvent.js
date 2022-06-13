@@ -10,7 +10,7 @@
 const { ipcMain } = require('electron');
 const os = require('os');
 const pty = require('node-pty');
-const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
+const shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
 const ptyProcess = pty.spawn(shell, [], {
     name: 'xterm-color',
     cols: 120,
@@ -22,9 +22,13 @@ const ptyProcess = pty.spawn(shell, [], {
 function handleTerminalMsg(event,data) {
     ptyProcess.write(data);
 }
-
+function resizeTerminal(event, cols, rows) {
+    console.log(cols, rows);
+    ptyProcess.resize(cols, rows);
+}
 module.exports = function initialiseTerminalListeners (win){
     ipcMain.handle('terminal:sendData', handleTerminalMsg);
+    ipcMain.handle('terminal:resize', resizeTerminal);
     ptyProcess.on('data', function (data) {
         win.webContents.send('terminal:receiveData', data);
     });

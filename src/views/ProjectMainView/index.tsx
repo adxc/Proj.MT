@@ -15,15 +15,29 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import {IProject} from "@interfaces";
+import classNames from "classnames";
+import { useSpring, animated } from 'react-spring'
 
 const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList,path,sizes}) {
+    const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
     const [executeCmd, setExecuteCmd] = useState<any>([]);
+    const styles = useSpring({ transition: 'height .5s' })
     function handleCommand(type:string,command:string){
         setExecuteCmd([...executeCmd,command])
     }
+    function handleCollapse() {
+        setIsCollapsed(!isCollapsed)
+    }
+    const projectMainStyle = classNames(
+        'px-10 overflow-auto',
+        {
+            'h-[calc(100vh-26rem)]': !isCollapsed,
+            'h-[calc(100vh-3rem)]': isCollapsed,
+        }
+    )
     return (
-        <div>
-            <div className="px-10">
+        <>
+            <animated.div style={styles} className={projectMainStyle} >
                 <div className="font-[butter-sans]  text-[36px] mt-10 text-white">{name}</div>
                 <Paper elevation={3}
                        sx={{
@@ -54,9 +68,9 @@ const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList
                     </div>
                 }/>
 
-            </div>
-            <TerminalView executeCmd={executeCmd} path={path}/>
-        </div>
+            </animated.div>
+            <TerminalView executeCmd={executeCmd} path={path} onCollapse={handleCollapse} isCollapsed={isCollapsed}/>
+        </>
     );
 };
 export default ProjectMainView;

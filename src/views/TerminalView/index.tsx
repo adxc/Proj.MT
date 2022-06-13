@@ -1,66 +1,67 @@
-import { FC, useEffect, useMemo, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import ArrowCircleDownSharpIcon from '@mui/icons-material/ArrowCircleDownSharp'
-import HighlightOffSharpIcon from '@mui/icons-material/HighlightOffSharp'
 import ArrowCircleUpSharpIcon from '@mui/icons-material/ArrowCircleUpSharp'
 import 'xterm/css/xterm.css'
-// import chalk from 'chalk';
 import { useSpring, animated } from 'react-spring'
 import classNames from 'classnames'
+import _ from 'lodash';
 
-const TerminalView: FC<any> = function ({ executeCmd, path }) {
-	const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
+const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapsed,onCollapse}) {
 	const terminalRef = useRef<HTMLDivElement>(null)
 	const styles = useSpring({ transition: 'height .5s' })
-	const term = useMemo(
-		() =>
-			new Terminal({
-				rendererType: 'canvas',
-				cols: 120,
-				rows: 18,
-				fontFamily: 'MesloLGS NF',
-				disableStdin: false,
-				cursorBlink: true,
-				convertEol: true,
-			}),
-		[]
-	)
+	const term = useRef(new Terminal({
+		rendererType: 'canvas',
+		disableStdin: false,
+		cursorBlink: true,
+		convertEol: true,
+	}))
+	const fitAddon = useRef(new FitAddon())
 	const teriminalStyle = classNames(
-		'absolute w-full bottom-0 h-96 bg-black text-white px-2',
+		'w-full bg-black text-white px-2 absolute bottom-0',
 		{
+			'h-[30rem]': !isCollapsed,
 			'h-10': isCollapsed,
 		}
 	)
 	useEffect(() => {
-		const fitAddon = new FitAddon()
-		term.loadAddon(fitAddon)
-		term.open(terminalRef.current as HTMLDivElement)
-		fitAddon.fit()
-		//   term.writeln(`Welcome to ${chalk.red('Proj.MT')}`);
-		term.focus()
+		term.current.loadAddon(fitAddon.current)
+		term.current.open(terminalRef.current as HTMLDivElement)
+		const resize = _.debounce(() => {
+			fitAddon.current.fit()
+			console.log(term.current.cols, term.current.rows)
+			window.electronAPI.resizeTerminal(term.current.cols, term.current.rows)
+		},500)
 		window.electronAPI.receiveTerminalData((data: string | Uint8Array) => {
-			term.write(data)
+			term.current.write(data)
 		})
-		term.onData((data) => {
+		term.current.onData((data) => {
 			window.electronAPI.sendTerminalData(data)
 		})
-		window.electronAPI.sendTerminalData(`cd ${path}\n`)
+		window.addEventListener('resize', resize)
+		return () => {
+			window.removeEventListener('resize',resize)
+		}
 	}, [])
 	useEffect(() => {
+		if(!isCollapsed){
+			fitAddon.current.fit()
+			window.electronAPI.resizeTerminal(term.current.cols, term.current.rows)
+		}
+	}, [isCollapsed])
+	useEffect(() => {
 		if (executeCmd.length > 0) {
-			window.electronAPI.sendTerminalData(`npm run ${executeCmd[0].name}\n`)
+			window.electronAPI.sendTerminalData(`npm run ${executeCmd[0].name}\r\n`)
 		}
 	}, [executeCmd])
-	function handleCollapse() {
-		setIsCollapsed(!isCollapsed)
-	}
+
 	return (
 		<animated.div style={styles} className={teriminalStyle}>
 			<div className="flex my-2 justify-between items-center">
 				<span>终端</span>
 				<div className="flex items-center">
-					<span className="cursor-pointer mr-1" onClick={handleCollapse}>
+					<span className="cursor-pointer mr-1" onClick={onCollapse}>
 						{!isCollapsed ? (
 							<ArrowCircleDownSharpIcon />
 						) : (

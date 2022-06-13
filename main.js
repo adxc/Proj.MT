@@ -43,6 +43,7 @@ function createWindow() {
 	})
 
 	win.on('ready-to-show', function () {
+		win.maximize()
 		win.show() // 初始化后再显示
 	})
 	initialiseEventListeners()
