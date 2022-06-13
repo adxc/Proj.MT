@@ -17,7 +17,6 @@ const MainView:FC<IMain> = function({isOpen}){
     const [preview, setPreview] = useState<IProject>({
         pid: '',
         name: '',
-        path: '',
         commandList: [],
         packageList: [],
         sizes: '',

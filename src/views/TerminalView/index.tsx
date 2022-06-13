@@ -71,7 +71,12 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 					{/*<span><HighlightOffSharpIcon className="text-red-700 cursor-pointer"/></span>*/}
 				</div>
 			</div>
-			<div ref={terminalRef} />
+			<div className="flex">
+				<div ref={terminalRef} className="basis-full"/>
+				<div className="basis-32 bg-gray-800 p-2 flex-none">
+
+				</div>
+			</div>
 		</animated.div>
 	)
 }

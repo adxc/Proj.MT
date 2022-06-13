@@ -62,7 +62,6 @@ export interface IProjectBase{
 export interface IProject extends IProjectBase{
     packageList: any[];
     commandList: any[];
-    path: string;
     sizes: string;
     type?: string;
 }

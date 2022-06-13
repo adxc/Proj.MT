@@ -18,7 +18,7 @@ import {IProject} from "@interfaces";
 import classNames from "classnames";
 import { useSpring, animated } from 'react-spring'
 
-const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList,path,sizes}) {
+const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList,sizes}) {
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
     const [executeCmd, setExecuteCmd] = useState<any>([]);
     const styles = useSpring({ transition: 'height .5s' })
@@ -69,7 +69,7 @@ const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList
                 }/>
 
             </animated.div>
-            <TerminalView executeCmd={executeCmd} path={path} onCollapse={handleCollapse} isCollapsed={isCollapsed}/>
+            <TerminalView executeCmd={executeCmd} onCollapse={handleCollapse} isCollapsed={isCollapsed}/>
         </>
     );
 };
