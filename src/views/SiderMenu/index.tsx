@@ -28,6 +28,7 @@ const SiderMenu: FC<ISiderMenuProps> = function ({handlePreview}) {
 	const { projectList } = useSelector((state:RootState) => state.project)
 	const dispatch = useDispatch()
 	const [openIndex, setOpenIndex] = useState<any>()
+	const [toolVisible, setToolVisible] = useState<boolean>(false)
 	function handleOpen(pid: any) {
 		setOpenIndex(pid)
 		handlePreview(pid)
@@ -68,7 +69,11 @@ const SiderMenu: FC<ISiderMenuProps> = function ({handlePreview}) {
 					))
 				}
 			</div>
-			<SpeedDial ariaLabel="add new project" icon={<SpeedDialIcon />}>
+			<SpeedDial ariaLabel="add new project"
+					   icon={<SpeedDialIcon />}
+					   open={toolVisible}
+					   onClick={() => setToolVisible(!toolVisible)}
+			>
 				{actions.map((action) => (
 					<SpeedDialAction
 						key={action.name}

@@ -11,6 +11,7 @@ import {IMain, IProject} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
 import TabPanel from '@components/TabPanel';
 import ProjectMainView from "../ProjectMainView";
+import TerminalView from "../TerminalView";
 
 const MainView:FC<IMain> = function({isOpen}){
     const [preview, setPreview] = useState<IProject>({
@@ -36,7 +37,6 @@ const MainView:FC<IMain> = function({isOpen}){
     },[isOpen])
     function handlePreview(pid:any){
         window.electronAPI.queryProjectDetails(pid).then((res: any) => {
-            console.log(res)
             setPreview(res)
         })
     }
@@ -49,6 +49,7 @@ const MainView:FC<IMain> = function({isOpen}){
                         preview.pid && <ProjectMainView {...preview}/>
                     }
                 </TabPanel>
+                {/*<TerminalView />*/}
             </div>
         </div>
     )
