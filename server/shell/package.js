@@ -80,17 +80,16 @@ function uninstallPackage(params) {
 	installOrUpdatePackage(2, params)
 }
 /**
- *更新包
+ *获取包版本
  * @param {
  * pid:唯一标识
  * packageName:包名称
- * version:包版本
  * } params
  * @return Array[string]
  */
 function getPackageVersionsByNpm(params) {
 	return new Promise((r, j) => {
-		const { pid, packageName, version = 'latest' } = params
+		const { pid, packageName } = params
 		const path = queryProject(pid)?.path
 		shell.cd(path)
 		shell.exec(
