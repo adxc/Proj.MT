@@ -67,7 +67,6 @@ const ProjectMainView:FC<IProject> = function ({pid,name,packageList,commandList
                         </div>
                     </div>
                 }/>
-
             </animated.div>
             <TerminalView executeCmd={executeCmd} onCollapse={handleCollapse} isCollapsed={isCollapsed}/>
         </>

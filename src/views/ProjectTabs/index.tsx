@@ -15,7 +15,6 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[]}){
     const [value, setValue] = useState(0);
     // 选择项目
     function handleSelectProject(e: SyntheticEvent,value: number) {
-        console.log(1)
         setValue(value);
     }
     return (
@@ -31,7 +30,6 @@ const ProjectTabs: FC<IProjectTabs> = function({projectList=[]}){
                 {
                     projectList.map((item, index) => <Tab key={index} label={item.name}/>)
                 }
-
             </Tabs>
         </div>
 

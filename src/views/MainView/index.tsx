@@ -11,7 +11,6 @@ import {IMain, IProject} from "@interfaces";
 import { useSpring, animated } from 'react-spring'
 import TabPanel from '@components/TabPanel';
 import ProjectMainView from "../ProjectMainView";
-import TerminalView from "../TerminalView";
 
 const MainView:FC<IMain> = function({isOpen}){
     const [preview, setPreview] = useState<IProject>({
