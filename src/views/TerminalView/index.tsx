@@ -22,6 +22,7 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 		cursorBlink: true,
 		convertEol: true,
 	}))
+	const termMap = useRef<Map<string, Terminal>>(new Map())  // 初始化terminal Map
 	const fitAddon = useRef(new FitAddon())
 	const teriminalStyle = classNames(
 		'w-full bg-black text-white px-2 absolute bottom-0',
@@ -57,13 +58,34 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 	}, [isCollapsed])
 	useEffect(() => {
 		console.log(executeCmd)
+		console.log(termMap.current)
 		// if (executeCmd.length > 0) {
 		// 	window.electronAPI.sendTerminalData(`npm run ${executeCmd[0].name}\r\n`)
 		// }
+		console.log(document.querySelector('#terminial-1'))
+		console.log(document.querySelector('#terminial-0'))
 	}, [executeCmd])
 	function handleSelectTerminalTab(e: SyntheticEvent,value: number) {
 		setTermTabValue(value)
 	}
+	// 生成终端
+	function createTerminal(dom: HTMLDivElement) {
+		const term = new Terminal({
+			rendererType: 'canvas',
+			disableStdin: false,
+			cursorBlink: true,
+			convertEol: true,
+		})
+		term.loadAddon(fitAddon.current)
+		term.open(dom)
+		window.electronAPI.receiveTerminalData((data: string | Uint8Array) => {
+			term.write(data)
+		})
+		term.onData((data) => {
+			window.electronAPI.sendTerminalData(data)
+		})
+	}
+	// 渲染多终端
 	function renderTerminalTab() {
 		if(executeCmd.length > 1){
 			return (
@@ -82,12 +104,15 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 							textColor="inherit"
 							aria-label="projects tabs"
 							orientation="vertical"
+							classes={{
+								root: 'w-full',
+							}}
 							value={termTabValue}
 							onChange={handleSelectTerminalTab}
 						>
 							{
 								executeCmd.map((item: any) => (
-									<Tab label={<span className="bg-pink-300 hover:bg-white/40">{item.name}</span>} icon={<TerminalOutlinedIcon/>} iconPosition="start" sx={{justifyContent:"flex-start",minHeight:42}}/>
+									<Tab label={`${item.name}`} icon={<TerminalOutlinedIcon/>} iconPosition="start" sx={{justifyContent:"flex-start",minHeight:42}}/>
 								))
 							}
 						</Tabs>

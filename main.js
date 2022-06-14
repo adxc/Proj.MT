@@ -17,7 +17,6 @@ function createWindow() {
 		minWidth: 1024,
 		webPreferences: {
 			nodeIntegration: true,
-			contextIsolation: true,
 			preload: path.resolve(__dirname, 'server/preload.js'),
 			webSecurity: false, //解决跨域
 		},

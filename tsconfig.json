@@ -19,6 +19,9 @@
 			"@interfaces": ["./src/interfaces"]
 		}
 	},
-	"include": ["src"],
+	"include": [
+      "src",
+      "../../../../Library/Caches/JetBrains/WebStorm2022.1/javascript/typings/node/16.11.33/node_modules/@types/node/globals.d.ts"
+    ],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

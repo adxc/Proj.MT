@@ -15,7 +15,7 @@ const ptyProcess = pty.spawn(shell, [], {
     name: 'xterm-color',
     cols: 120,
     rows: 18,
-    cwd: process.env.HOME,
+    cwd: process.env.HOME, // 首次进入系统根目录
     env: process.env
 });
 
@@ -23,7 +23,6 @@ function handleTerminalMsg(event,data) {
     ptyProcess.write(data);
 }
 function resizeTerminal(event, cols, rows) {
-    console.log(cols, rows);
     ptyProcess.resize(cols, rows);
 }
 module.exports = function initialiseTerminalListeners (win){
