@@ -1,9 +1,9 @@
 import React, {FC, SyntheticEvent, useEffect, useRef, useState} from 'react'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
+import 'xterm/css/xterm.css'
 import ArrowCircleDownSharpIcon from '@mui/icons-material/ArrowCircleDownSharp'
 import ArrowCircleUpSharpIcon from '@mui/icons-material/ArrowCircleUpSharp'
-import 'xterm/css/xterm.css'
 import { useSpring, animated } from 'react-spring'
 import classNames from 'classnames'
 import _ from 'lodash';
@@ -11,8 +11,9 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined';
 import TabPanel from '@components/TabPanel';
+import TerminalItem from "@components/TerminalItem";
 
-const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapsed,onCollapse}) {
+const TerminalView: FC<any> = function ({ executeCmd = [],isCollapsed,onCollapse}) {
 	const terminalRef = useRef<HTMLDivElement>(null)
 	const [termTabValue, setTermTabValue] = useState<number>(0)
 	const styles = useSpring({ transition: 'height .5s' })
@@ -23,6 +24,7 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 		convertEol: true,
 	}))
 	const termMap = useRef<Map<string, Terminal>>(new Map())  // 初始化terminal Map
+	const termArr = useRef<Terminal[]>([])  // 初始化terminal Map
 	const fitAddon = useRef(new FitAddon())
 	const teriminalStyle = classNames(
 		'w-full bg-black text-white px-2 absolute bottom-0',
@@ -32,38 +34,36 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 		}
 	)
 	useEffect(() => {
-		term.current.loadAddon(fitAddon.current)
-		term.current.open(terminalRef.current as HTMLDivElement)
+	    // createTerminal(terminalRef.current as HTMLDivElement)
+		/*console.log(termArr.current)
 		const resize = _.debounce(() => {
 			fitAddon.current.fit()
-			console.log(term.current.cols, term.current.rows)
-			window.electronAPI.resizeTerminal(term.current.cols, term.current.rows)
+			window.electronAPI.resizeTerminal(termArr.current[termTabValue].cols, termArr.current[termTabValue].rows)
 		},500)
 		window.electronAPI.receiveTerminalData((data: string | Uint8Array) => {
-			term.current.write(data)
+			console.log(termTabValue)
+			termArr.current[termTabValue].write(data)
 		})
-		term.current.onData((data) => {
+		termArr.current[termTabValue]?.onData((data) => {
+			console.log(2)
 			window.electronAPI.sendTerminalData(data)
 		})
 		window.addEventListener('resize', resize)
 		return () => {
 			window.removeEventListener('resize',resize)
-		}
-	}, [])
+		}*/
+	}, [termTabValue])
 	useEffect(() => {
-		if(!isCollapsed){
-			fitAddon.current.fit()
-			window.electronAPI.resizeTerminal(term.current.cols, term.current.rows)
-		}
+		// if(!isCollapsed){
+		// 	fitAddon.current.fit()
+		// 	window.electronAPI.resizeTerminal(term.current.cols, term.current.rows)
+		// }
 	}, [isCollapsed])
 	useEffect(() => {
 		console.log(executeCmd)
-		console.log(termMap.current)
 		// if (executeCmd.length > 0) {
 		// 	window.electronAPI.sendTerminalData(`npm run ${executeCmd[0].name}\r\n`)
 		// }
-		console.log(document.querySelector('#terminial-1'))
-		console.log(document.querySelector('#terminial-0'))
 	}, [executeCmd])
 	function handleSelectTerminalTab(e: SyntheticEvent,value: number) {
 		setTermTabValue(value)
@@ -78,12 +78,7 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 		})
 		term.loadAddon(fitAddon.current)
 		term.open(dom)
-		window.electronAPI.receiveTerminalData((data: string | Uint8Array) => {
-			term.write(data)
-		})
-		term.onData((data) => {
-			window.electronAPI.sendTerminalData(data)
-		})
+		termArr.current.push(term)
 	}
 	// 渲染多终端
 	function renderTerminalTab() {
@@ -93,7 +88,7 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 					{
 						executeCmd.map((item: any, index: number) => (
 							<TabPanel value={termTabValue} index={index} classes="basis-full">
-								<div id={`terminial-${index}`}/>
+								<TerminalItem/>
 							</TabPanel>
 						))
 					}
@@ -122,7 +117,7 @@ const TerminalView: FC<any> = function ({ executeCmd = [], path = '' ,isCollapse
 		}
 		return (
 			<div className="flex">
-				<div ref={terminalRef}/>
+				<TerminalItem/>
 			</div>
 		)
 	}

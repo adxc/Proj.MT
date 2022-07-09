@@ -4,8 +4,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openFolder: () => {
     return ipcRenderer.invoke('dialog:openFolder');
   },
-  sendTerminalData:(command) => {
-    ipcRenderer.invoke('terminal:sendData', command);
+  createTerminal: () => {
+    return ipcRenderer.invoke('terminal:createTerminal');
+  },
+  sendTerminalData:(pid,command) => {
+    ipcRenderer.invoke('terminal:sendData', [pid,command]);
   },
   receiveTerminalData: (callback) => {
     ipcRenderer.on('terminal:receiveData', (event, data) => {
@@ -24,7 +27,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   deleteProject:(pid) => {
     return ipcRenderer.invoke('deleteProject', pid);
   },
-  resizeTerminal:(cols, rows) => {
-    ipcRenderer.invoke('terminal:resize', cols, rows);
+  resizeTerminal:(pid,cols,rows) => {
+    ipcRenderer.invoke('terminal:resize', [pid,cols,rows]);
   }
 });
