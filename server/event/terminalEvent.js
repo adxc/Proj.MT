@@ -10,7 +10,7 @@
 const { ipcMain } = require('electron');
 const os = require('os');
 const pty = require('node-pty');
-const shell = os.platform() === 'win32' ? 'cmd.exe' : 'bash';
+const shell = os.platform() === 'win32' ? 'cmd.exe' : process.env.SHELL;
 let ptyContainer = new Map();
 function handleTerminalMsg(event,params) {
     const [pid,data] = params;
@@ -27,7 +27,7 @@ function handleCreateTerminal(win) {
         name: 'xterm-color',
         cols: 120,
         rows: 18,
-        cwd: process.env.HOME, // 首次进入系统根目录
+        cwd: process.cwd(), // 首次进入系统根目录
         env: process.env
     });
     ptyProcess.on('data', function (data) {
